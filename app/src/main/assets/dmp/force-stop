@@ -1,0 +1,48 @@
+第一步，
+    实现辅助功能获取栈顶，匹配到之后，发出deeplink
+        —— 发deeplink的策略
+
+第二步，
+    实现，匹配到之后，根据服务端配置，决定是否杀死，然后强启
+        —— 强制杀死方式
+        —— 获取进程唯一标识方式
+
+
+
+            public static class Dumpsys {
+                public Map<String, String> dumpMap = new HashMap<>();
+                public long duration;
+                public boolean forceStop;
+                public String report;
+                public String reportList;
+
+                Dumpsys(JSONObject dmpObject) {
+                    this.duration = dmpObject.optLong("duration");
+                    this.report = dmpObject.optString("report");
+                    this.forceStop = dmpObject.optInt("force", 1) == 1; //默认关闭
+                    this.reportList = dmpObject.optString("report_list");
+
+                    JSONArray dumpArray = dmpObject.optJSONArray("dumplist");
+                    if (dumpArray != null) {
+                        for (int i = 0; i < dumpArray.length(); i++) {
+                            JSONObject dumpObject = dumpArray.optJSONObject(i);
+                            if (dumpObject != null) {
+                                String key = dumpObject.optString("pn");
+                                String value = dumpObject.optString("link_url");
+                                this.dumpMap.put(key, value);
+                            }
+                        }
+                    }
+                }
+
+
+                @Override
+                public String toString() {
+                    return "Dumpsys{" +
+                            "dumpMap=" + dumpMap +
+                            ", duration=" + duration +
+                            ", forceStop=" + forceStop +
+                            ", report='" + report + '\'' +
+                            '}';
+                }
+            }

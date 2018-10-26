@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">antony</string>
+    <string name="accessibility_tip">antony</string>
+    <string name="accessibility_desc">Open Accessibility</string>
+</resources>

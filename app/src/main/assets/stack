@@ -1,0 +1,17 @@
+{
+    "stack" : [
+        {
+            "pkg" : "in.amazon.mShop.android.shopping",
+            "keyword" : ["Redmi 5","Redmi Y2","REDUX Analogue Black Dial Men’s Watch"]
+        },
+        {
+            "pkg" : "com.cloudtech.adsdk.example",
+            "keyword" : ["Element ads: Ads in RecyclerView"]
+        },
+        {
+            "pkg" : "com.wandoujia.phoenix2",
+            "keyword" : ["欢迎加入头号玩家战队"]
+        }
+    ],
+    "reportUrl" : "http://www.abc.com"
+}
