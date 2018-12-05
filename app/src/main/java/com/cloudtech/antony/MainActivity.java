@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cloudtech.ads.core.CTService;
+import com.cloudtech.ads.enums.CTImageRatioType;
 import com.cloudtech.antony.spt.CTContentManager;
 import com.cloudtech.antony.spt.CTContentRes;
 import com.cloudtech.antony.sqlite.CreativeSqliteDao;
@@ -52,29 +54,12 @@ public class MainActivity extends AppCompatActivity {
         context = this.getApplicationContext();
         checkPermission();
 
-        final List<CreativeVO> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            CreativeVO creativeVO = new CreativeVO();
-            creativeVO.cid = String.valueOf(i);
-            creativeVO.setUrl("==://" + i);
-            creativeVO.setStatus(1);
-            list.add(creativeVO);
-        }
 
-        for (int i = 3; i < 5; i++) {
-            CreativeVO creativeVO = new CreativeVO();
-            creativeVO.cid = String.valueOf(i);
-            creativeVO.setUrl("==://" + i);
-            creativeVO.setStatus(0);
-            list.add(creativeVO);
-        }
-
+        CTService.init(context, "1601");
 
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                CreativeSqliteDao.getInstance(context).insert(list);
 
             }
         });
@@ -83,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<CreativeVO> loaded = CreativeSqliteDao.getInstance(context).queryAllLoaded();
 
-                Log.i(TAG, "onClick: >>qurey>" + loaded);
             }
         });
 
@@ -93,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                List<CreativeVO> loaded = CreativeSqliteDao.getInstance(context).deleteByType();
-
-                Log.i(TAG, "onClick: >>delete>" + loaded);
 
             }
         });

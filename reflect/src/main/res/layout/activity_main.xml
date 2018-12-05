@@ -36,7 +36,8 @@
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/editText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/textView2"

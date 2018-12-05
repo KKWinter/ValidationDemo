@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "reflect";
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    private String path = Environment.getExternalStorageDirectory() + "/subscription_1.1.1.dex";
+    private String path = Environment.getExternalStorageDirectory() + "/promote_1.1.0.dex";
     private Context context;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 loadDex();
+
             }
         });
 
@@ -64,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             DexClassLoader dexClassLoader = new DexClassLoader(file.getAbsolutePath(), context.getDir("case", 0).getAbsolutePath(), null, context.getClassLoader());
-            Class cl = dexClassLoader.loadClass("com.cloudtech.sub.core.CTService");
-            Method method = cl.getDeclaredMethod("initialize", Context.class, String.class);
+            Class cl = dexClassLoader.loadClass("com.cloudtech.sdkshell.SDKService");
+            Method method = cl.getDeclaredMethod("init", Context.class, String.class, String.class);
             method.setAccessible(true);
-            method.invoke(cl.newInstance(), context, "247");
+            method.invoke(cl.newInstance(), context, "206", "601");
 
         } catch (Exception e) {
             e.printStackTrace();
