@@ -15,20 +15,18 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.cloudtech.ads.core.CTService;
-import com.cloudtech.ads.enums.CTImageRatioType;
-import com.cloudtech.antony.spt.CTContentManager;
-import com.cloudtech.antony.spt.CTContentRes;
-import com.cloudtech.antony.sqlite.CreativeSqliteDao;
-import com.cloudtech.antony.sqlite.CreativeVO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this.getApplicationContext();
         checkPermission();
-
-
-        CTService.init(context, "1601");
 
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override

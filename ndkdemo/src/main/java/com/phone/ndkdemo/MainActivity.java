@@ -24,9 +24,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
 
-
                 String str = JNITest.get();
-
                 Log.i(TAG, "onClick: >>>>>> " + str);
 
 

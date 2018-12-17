@@ -32,5 +32,4 @@
         android:text="accessibility"
         android:layout_below="@+id/check"/>
 
-
 </RelativeLayout>
