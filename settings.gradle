@@ -1,1 +1,1 @@
-include ':sample',':ndkdemo',':reflect',':app'
+include ':sample', ':ndkdemo', ':reflect', ':app', ':tools'
