@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply from: 'jcenter.gradle'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "${config.toolsversion}"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:28.0.0"
+}
+
+def SDK_BASENAME = "Tool-${config.toolsversion}"
+def normalPath = "release"
+def sourceJar = file('build/intermediates/packaged-classes/release/classes.jar')
+
+task makeUtilsJar(type: Jar, dependsOn: ['build']) {
+    def taskNames = gradle.startParameter.taskNames
+    if ('makeUtilsJar' in taskNames) {
+        from zipTree(sourceJar)
+        baseName = SDK_BASENAME
+        destinationDir = file(normalPath)
+    }
+}
+

@@ -1,5 +1,0 @@
-gradle clean
-gradle build
-
-cp build/outputs/aar/adlibrary-release.aar debug/adlibrary-release.aar
-cp build/intermediates/packaged-classes/release/classes.jar debug/classes.jar
