@@ -72,6 +72,9 @@ public class Utils {
 
     /**
      * 检查网络链接
+     *
+     * @param context 环境变量
+     * @return 是否连接
      */
     public static boolean isNetworkEnable(Context context) {
         try {
@@ -84,6 +87,9 @@ public class Utils {
 
     /**
      * 获取网络类型
+     *
+     * @param context 环境变量
+     * @return 网络类型
      */
     public static int getNetworkType(Context context) {
         try {
@@ -96,6 +102,9 @@ public class Utils {
 
     /**
      * 获取ip地址
+     *
+     * @param context 环境变量
+     * @return ip地址
      */
     public static String getIpAddress(Context context) {
         int netType = getNetworkType(context);
@@ -171,6 +180,8 @@ public class Utils {
 
     /**
      * 获取应用包名
+     * @param context 环境变量
+     * @return 包名
      */
     public static String getAppPackageName(Context context) {
         String pkgName = "";
@@ -186,6 +197,9 @@ public class Utils {
 
     /**
      * 获取应用版本号
+     *
+     * @param context 环境变量
+     * @return 版本号
      */
     public static int getAppVersionCode(Context context) {
         try {
@@ -199,7 +213,10 @@ public class Utils {
     }
 
     /**
-     * 获取Android Id
+     * 获取android id
+     *
+     * @param context 环境变量
+     * @return aid
      */
     public static String getAndroidId(Context context) {
         String androidId = "";
@@ -214,6 +231,9 @@ public class Utils {
 
     /**
      * 获取手机IMEI
+     *
+     * @param context 环境变量
+     * @return imei
      */
     public static String getIMEI(Context context) {
         String imei = "";
@@ -343,7 +363,7 @@ public class Utils {
     }
 
 
-    /**
+    /*
      * 获取已经安装的用户应用列表
      */
     public static List<String> getInstalledApps(Context context) {
@@ -523,7 +543,7 @@ public class Utils {
     }
 
 
-    /**
+    /*
      * 不以http、https、market开头的url
      */
     public static boolean isWebViewPossibleCrashDeepLink(String url) {
@@ -627,9 +647,7 @@ public class Utils {
     }
 
 
-    /**
-     * 获取当前版本
-     */
+    //获取当前版本
     public static String getVersionName() {
         return BuildConfig.VERSION_NAME;
     }

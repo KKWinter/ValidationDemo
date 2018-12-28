@@ -21,7 +21,10 @@ public class TimeOutUtils {
     }
 
     /**
-     * @param listener listener
+     * 设置超时监听
+     *
+     * @param listener 监听回调
+     * @return 结果
      */
     public TimeOutUtils setTimeOutListener(TimeOutListener listener) {
         mTimeOutListener = listener;

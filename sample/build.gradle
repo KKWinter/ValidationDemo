@@ -32,4 +32,7 @@ dependencies {
     implementation 'com.facebook.stetho:stetho:1.5.0'
     implementation files('libs/mintegral_alphab.jar')
     implementation files('libs/mintegral_common.jar')
+
+    implementation 'com.zcoup:base:4.0.0'
+    implementation 'com.kkwinter.utils:tools:1.2.0'
 }

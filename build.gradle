@@ -21,6 +21,9 @@ allprojects {
         maven {
             url 'https://dl.bintray.com/huangdong19901020/KKWinter'
         }
+        maven {
+            url "https://dl.bintray.com/huangdong19901020/Zcoup"
+        }
     }
 }
 
@@ -30,6 +33,6 @@ task clean(type: Delete) {
 
 ext {
     config = [
-            toolsversion: '1.2.0'
+            toolsversion: '1.4.0'
     ]
 }

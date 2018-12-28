@@ -18,7 +18,7 @@ public final class RijindaelUtils {
      *
      * @param content：明文
      * @param password：密码
-     * @return
+     * @return  密文
      */
     public static String encrypt(String content, String password) {
         if (isEmpty(content) || isEmpty(password)) {
@@ -100,7 +100,9 @@ public final class RijindaelUtils {
      *
      * @param content：解密内容
      * @param password:解密密码
-     * @return
+     * @param type:解密字符串类型
+     * @throws Exception 异常
+     * @return 解密后的明文
      */
     public static byte[] decryptByType(byte[] content, String password, String type) throws Exception {
 
@@ -174,7 +176,8 @@ public final class RijindaelUtils {
      *
      * @param content：解密内容, 十六进制
      * @param password:解密密码
-     * @return
+     * @throws Exception 异常
+     * @return 解密的明文
      */
     public static String decrypt(String content, String password) throws Exception {
 
@@ -308,8 +311,8 @@ public final class RijindaelUtils {
     /**
      * int类型转化成byte数组
      *
-     * @param res
-     * @return
+     * @param res 类型
+     * @return 结果
      */
     public static byte[] int2byte(int res) {
         byte[] targets = new byte[4];
@@ -323,8 +326,8 @@ public final class RijindaelUtils {
     /**
      * byte数组转成int类型
      *
-     * @param res
-     * @return
+     * @param res 类型
+     * @return 结果
      */
     public static int byte2int(byte[] res) {
         int targets = 0;
@@ -338,8 +341,8 @@ public final class RijindaelUtils {
     /**
      * 将64位的十六进制的密钥库转成32位的字符串密钥
      *
-     * @param hexStr
-     * @return
+     * @param hexStr 十六进制
+     * @return 结果
      */
     public static String hexPasswordToStrPassword(String hexStr) {
         byte[] bytes = RijindaelUtils.hexStr2Bytes(hexStr);
@@ -354,8 +357,8 @@ public final class RijindaelUtils {
     /**
      * 判断字符串不为空
      *
-     * @param content
-     * @return
+     * @param content context
+     * @return 结果
      */
     public static boolean isEmpty(String content) {
         return content == null || "".equals(content);

@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
+/*
  * 线程池管理类
  */
 public class ThreadPoolProxy {
@@ -48,7 +48,7 @@ public class ThreadPoolProxy {
     }
 
 
-    /**
+    /*
      * 提交任务
      */
     public Future<?> submit(Runnable task) {
@@ -57,7 +57,7 @@ public class ThreadPoolProxy {
     }
 
 
-    /**
+    /*
      * 执行任务
      */
     public void execute(Runnable task) {
@@ -66,7 +66,7 @@ public class ThreadPoolProxy {
     }
 
 
-    /**
+    /*
      * 移除任务
      */
     public void remove(Runnable task) {
@@ -75,7 +75,7 @@ public class ThreadPoolProxy {
     }
 
 
-    /**
+    /*
      * 返回普通线程池的代理
      * 双重检查加锁,保证只有第一次实例化的时候才启用同步机制,提高效率
      */

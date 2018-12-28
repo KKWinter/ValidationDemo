@@ -1,27 +1,5 @@
 package com.kkwinter.utils.aes;
 
-/**
- * Rijndael.java
- *
- * @author Paulo Barreto <paulo.barreto@terra.com.br>
- *         <p/>
- *         This software is hereby placed in the public domain.
- *         <p/>
- *         THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS
- *         OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- *         WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- *         ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE
- *         LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *         CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- *         SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
- *         BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- *         WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
- *         OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- *         EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * @version 1.0 (May 2001)
- *          <p/>
- *          Optimised Java implementation of the Rijndael (AES) block cipher.
- */
 public final class Rijndael {
 
     /**
@@ -253,6 +231,7 @@ public final class Rijndael {
      *
      * @param cipherKey the cipher key (128, 192, or 256 bits).
      * @param keyBits   size of the cipher key in bits.
+     * @throws Exception 错误
      * @param direction cipher direction (DIR_ENCRYPT, DIR_DECRYPT, or DIR_BOTH).
      */
     public void makeKey(byte[] cipherKey, int keyBits, int direction)
@@ -279,6 +258,7 @@ public final class Rijndael {
      *
      * @param cipherKey the cipher key (128, 192, or 256 bits).
      * @param keyBits   size of the cipher key in bits.
+     * @throws Exception 错误
      */
     public void makeKey(byte[] cipherKey, int keyBits)
             throws Exception {
