@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         ComponentName componentName = it.resolveActivity(context.getPackageManager());
         if (componentName != null) {    //已经安装该应用
             context.startActivity(it);
+
+
         }
     }
 
