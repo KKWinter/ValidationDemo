@@ -1,7 +1,6 @@
 package com.cloudtech.antony.spt;
 
 import android.app.DownloadManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -10,7 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.utils.CTLog;
 
 import org.json.JSONObject;
 

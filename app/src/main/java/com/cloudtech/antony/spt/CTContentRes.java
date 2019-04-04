@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.utils.CTLog;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;

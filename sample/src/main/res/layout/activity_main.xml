@@ -24,5 +24,9 @@
         android:layout_height="wrap_content"
         android:text="three" />
 
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

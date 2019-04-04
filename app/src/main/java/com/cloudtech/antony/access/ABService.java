@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.utils.CTLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,17 +45,21 @@ public class ABService extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         // 此方法是在主线程中回调过来的，所以消息是阻塞执行的
-        CTLog.d("original>>>>>>" + event.getPackageName());
-
-        AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
-        if (mABServiceListener != null) {
-            mABServiceListener.onAccessibilityEvent(event, nodeInfo);
-        }
 
 
-        if (amazonPkg.equals(event.getPackageName())) {
-            checkAndLaunchHitApp(event, nodeInfo, System.currentTimeMillis());
-        }
+        CTLog.d("original>>>>>>" + event);
+
+
+
+//        AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
+//        if (mABServiceListener != null) {
+//            mABServiceListener.onAccessibilityEvent(event, nodeInfo);
+//        }
+//
+//
+//        if (amazonPkg.equals(event.getPackageName())) {
+//            checkAndLaunchHitApp(event, nodeInfo, System.currentTimeMillis());
+//        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.phone.reflect;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,32 +20,26 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-
     @Test
     public void test() {
 
-
-
         try {
 
-            throwException();
-        } catch (IOException e) {
-            System.out.print("======" + e.getMessage());
+            Class cls = Class.forName("com.phone.reflect.Person");
+            System.out.println(cls);
+
+
+            Constructor<Person>[] con = cls.getConstructors();
+            System.out.println(con.length);
+
+            Constructor con1 = cls.getConstructor();
+            Constructor con2 = cls.getConstructor(String.class, int.class);
+
+
         } catch (Exception e) {
-            System.out.print("<<<<<<" + e.getMessage());
+            e.printStackTrace();
         }
 
-
     }
 
-
-    public void throwException() throws Exception {
-
-
-        String str = null;
-
-        str.isEmpty();
-
-
-    }
 }

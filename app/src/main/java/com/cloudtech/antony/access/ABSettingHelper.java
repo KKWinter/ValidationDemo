@@ -6,7 +6,7 @@ import android.provider.Settings;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.utils.CTLog;
 
 import java.util.ArrayList;
 import java.util.Collections;

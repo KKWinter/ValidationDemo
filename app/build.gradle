@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -42,7 +43,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.phone.individual:individual:2.0'
     testImplementation 'junit:junit:4.12'
+
+
     implementation files('libs/mintegral_alphab.jar')
     implementation files('libs/mintegral_common.jar')
+
+
+
     implementation files('libs/cloudssp_3.3.9.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

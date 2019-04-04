@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.utils.CTLog;
 import com.cloudtech.antony.MainActivity;
-import com.cloudtech.antony.ToastUtils;
+import com.cloudtech.antony.utils.ToastUtils;
 
 public class USBReceiver {
 

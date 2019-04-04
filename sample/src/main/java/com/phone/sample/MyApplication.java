@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.facebook.stetho.Stetho;
 import com.mintegral.msdk.MIntegralSDK;
 import com.mintegral.msdk.out.MIntegralSDKFactory;
+import com.zcoup.base.core.ZcoupSDK;
 
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class MyApplication extends Application {
         Stetho.initializeWithDefaults(this);
 
 
-        HookUtil hookUtil=new HookUtil(TestActivity.class, this);
-        hookUtil.hookAms();
+//        HookUtil hookUtil=new HookUtil(TestActivity.class, this);
+//        hookUtil.hookAms();
 
 
         // init sdk
@@ -38,6 +39,8 @@ public class MyApplication extends Application {
         // package value");
         sdk.init(map, this);
 
+
+        ZcoupSDK.initialize(this, "1601");
 
     }
 }

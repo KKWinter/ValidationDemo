@@ -2,6 +2,8 @@ package com.cloudtech.antony;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,28 +13,30 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Toast;
 
-import com.cloudtech.ads.core.CTService;
+import com.cloudtech.antony.utils.CTLog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "deeplink";
     private Context context;
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -42,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public static String mainAmazon = "https://www.amazon.in";
     public static String amazon = "https://www.amazon.in/gp/product/B077PWBC7J/ref=as_li_tl?ie=UTF8&tag=cloudmobi20-21&camp=3638&creative=24630&linkCode=as2&creativeASIN=B077PWBC7J&linkId=db4ce0d4471b8a342fc93c4b7b221ebf";
 
-    public static Handler handler = new Handler(Looper.myLooper());
+    public static String aiqiyi = "iqiyi://mobile/home?ftype=27&subtype=lk2_527";
+
 
 
     @Override
@@ -50,11 +55,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this.getApplicationContext();
-        checkPermission();
+//        checkPermission();
 
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                open();
 
             }
         });
@@ -64,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+
+
             }
         });
 
         findViewById(R.id.check).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
 
             }
@@ -84,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     //跳转系统自带界面 辅助功能界面
     private void open() {
@@ -101,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
      * DeepLink方式打开
      */
     private void openDeepLink(Context context, String deeplink) {
+        Log.i(TAG, "openDeepLink: >>>>>>>>" + deeplink);
         Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse(deeplink));
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ComponentName componentName = it.resolveActivity(context.getPackageManager());

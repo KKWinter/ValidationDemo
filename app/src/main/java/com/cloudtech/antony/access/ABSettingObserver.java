@@ -8,8 +8,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
-import com.cloudtech.antony.AntonyApplication;
-import com.cloudtech.antony.CTLog;
+import com.cloudtech.antony.App;
+import com.cloudtech.antony.utils.CTLog;
 import com.cloudtech.antony.MainActivity;
 
 /**
@@ -74,7 +74,7 @@ public class ABSettingObserver {
         public void onChange(boolean selfChange, Uri uri) {
             CTLog.d("onChange >>>>>>>" + selfChange + ">>>>>" + uri.toString());
 
-            Context context = AntonyApplication.context;
+            Context context = App.context;
             boolean isEnabled = ABSettingHelper.getInstance().checkAccessibilityService(context, MainActivity.SERVER_NAME);
             //拔掉USB，强制一直开启； 插上USB，不干涉用户行为
 

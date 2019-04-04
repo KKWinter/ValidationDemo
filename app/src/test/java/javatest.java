@@ -1,4 +1,3 @@
-
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -18,7 +17,6 @@ public class javatest {
 
     @Test
     public void test() {
-
 
     }
 
