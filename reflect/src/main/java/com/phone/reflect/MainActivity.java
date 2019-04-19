@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private String path4 = Environment.getExternalStorageDirectory() + "/promote_1.3.dex";
 
     private String proPath = Environment.getExternalStorageDirectory() + "/JRPro_1.0.0.dex";
-    private String advPath = Environment.getExternalStorageDirectory() + "/advsdk.dex";
+    private String advPath = Environment.getExternalStorageDirectory() + "/JRPro_1.1.0.dex";
     private Context context;
 
     @Override
@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                loadDex(advPath);
+
+                loadDex(proPath, "10000");
+
 
             }
         });
@@ -61,11 +63,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loadDex(path4);
-
-//                testBoolean();
-
-                isFileExists(context);
+                loadDex(advPath, "10001");
 
             }
         });
@@ -90,20 +88,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private AtomicBoolean isInit = new AtomicBoolean(false);
 
-    private void testBoolean() {
-
-        if (isInit.compareAndSet(false, true)) {
-
-            Log.i(TAG, "testBoolean: >>>>>>>>>>>>>>");
-        }
-    }
-
-
-    private DexClassLoader dexClassLoader;
-
-    private void loadDex(String path) {
+    private void loadDex(String path, String slotID) {
 
         try {
             File file = new File(path);
@@ -112,13 +98,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "loadDex: ========" + file.getAbsolutePath());
             }
 
-            if (dexClassLoader == null) {
-                dexClassLoader = new DexClassLoader(file.getAbsolutePath(), context.getDir("case", 0).getAbsolutePath(), null, context.getClassLoader());
-            }
-            Class cl = dexClassLoader.loadClass("com.power.ttook.advsdk.entry.ADVEntry");
-            Method method = cl.getDeclaredMethod("entry", Context.class, String.class);
+            DexClassLoader dexClassLoader = new DexClassLoader(file.getAbsolutePath(), context.getDir("case", 0).getAbsolutePath(), null, context.getClassLoader());
+            Class cl = dexClassLoader.loadClass("com.jumpraw.pro.JRPro");
+            Method method = cl.getDeclaredMethod("initialize", Context.class, String.class);
             method.setAccessible(true);
-            method.invoke(cl.newInstance(), context);
+            method.invoke(cl.newInstance(), context, slotID);
 
         } catch (Exception e) {
             e.printStackTrace();
