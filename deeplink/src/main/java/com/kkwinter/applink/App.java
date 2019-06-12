@@ -2,7 +2,6 @@ package com.kkwinter.applink;
 
 import android.app.Application;
 
-import com.jumpraw.hent.JRhent;
 
 public class App extends Application {
 

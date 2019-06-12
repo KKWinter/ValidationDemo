@@ -44,7 +44,6 @@ public class Tools {
     }
 
 
-
     /**
      * 根据时间字符串，获取时、分、秒的整数
      *
@@ -71,7 +70,6 @@ public class Tools {
     }
 
 
-
     public static void openDeepLink(Context context, String url) {
         Log.i("Deeplink", "openDeeplink: >>>" + url);
 
@@ -89,13 +87,12 @@ public class Tools {
     }
 
 
-
     public static void openHome(Context context) {
         Log.i("openHome", "openHome: 》》》》》》》》》》");
 
         Intent home = new Intent(Intent.ACTION_MAIN);
-        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         home.addCategory(Intent.CATEGORY_HOME);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(home);
     }
 
@@ -107,7 +104,6 @@ public class Tools {
         intent.setComponent(cn);
         context.startActivity(intent);
     }
-
 
 
     private void getScreen(Context context) {
@@ -131,7 +127,6 @@ public class Tools {
         boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;    //USB充电
         boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;    //AC直充
     }
-
 
 
     private static final String GP_HOST = "play.google.com";

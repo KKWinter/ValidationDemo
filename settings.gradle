@@ -1,1 +1,1 @@
-include ':sample', ':ndk', ':reflect', ':3rdsdk', ':tools', ':deeplink'
+include ':sample', ':ndk', ':reflect', ':advsdk', ':tools', ':deeplink', ':mdstd', ':windowmanager', ':testH'

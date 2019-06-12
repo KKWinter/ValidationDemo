@@ -1,8 +1,11 @@
 package com.kkwinter.applink;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "applinks";
     private Context context;
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -40,9 +44,13 @@ public class MainActivity extends AppCompatActivity {
     private String gpHttp = "https://play.google.com/store/apps/details?id=com.minidragon.pixelpetz";
     private String gpMarket = "market://details?id=com.minidragon.pixelpetz";
 
-    private String tbopen = "tbopen://m.taobao.com/tbopen/index.html?source=auto&action=ali.open.nav&module=h5&bootImage=0&h5Url=https%3A%2F%2Fh5.m.taobao.com%2Fbcec%2Fdahanghai-jump.html%3Fspm%";
-    private String youku2 = "youku://weex?source=00002179&url=https%3A%2F%2Fmarket.m.taobao.com%2Fyep%2Fweexmaker%2Fykpage%2Fpigspring_wmdt.js%3Fwh_weex%3Dtrue%26refer%3Dsanfang1903";
-    private String koubei = "koubei://platformapi/startapp?appId=20000001&actionType=20000238&chInfo=ch_DAUyinliu__chsub_jiguang13";
+
+    private String toutiao = "snssdk143://detail?groupid=6681884126867358212&gd_label=click_schema_abab71";
+    private String douyin = "snssdk1128://challenge/detail/1630497529464846?gd_label=click_schema_abab28";
+    private String tbopen = "tbopen://m.taobao.com/tbopen/index.html?source=auto&action=ali.open.nav&module=h5&bootImage=0&spm=2014.ugdhh.3234525723.10008-1181&bc_fl_src=growth_dhh_3234525723_10008-1181&materialid=10008&h5Url=https%3A%2F%2Fh5.m.taobao.com%2Fbcec%2Fdahanghai-jump.html%3Fspm%3D2014.ugdhh.3234525723.10008-1181%26bc_fl_src%3Dgrowth_dhh_3234525723_10008-1181";
+    private String koubei = "koubei://platformapi/startapp?appId=20000001&actionType=20000238&chInfo=ch_DAUyinliu__chsub_aguya4";
+
+
 
     private Spinner spinner;
     private List<String> data_list;
@@ -59,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         data_list = new ArrayList<>();
         data_list.add(aiqiyi1);
         data_list.add(tbopen);
-        data_list.add(youku2);
         data_list.add(koubei);
 
 
@@ -82,7 +89,51 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Tools.openDeepLink(context, finalUrl);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, douyin);
+
+                    }
+                }, 13000);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, toutiao);
+
+                    }
+                }, 10000);
+
+
+
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, tbopen);
+
+                    }
+                }, 16000);
+//
+//
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        Tools.openHome(context);
+//                        Tools.openDeepLink(context, koubei);
+//
+//                    }
+//                }, 19000);
+
 
             }
         });
@@ -93,18 +144,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Tools.openDeepLink(context, aiqiyi1);
-                Tools.openDeepLink(context, youku2);
 
-
-
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, toutiao);
 
                     }
-                }, 30000);
+                }, 10000);
 
 
             }
@@ -114,6 +163,30 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.deeplink).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, toutiao);
+
+                    }
+                }, 10000);
+
+
+
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Tools.openHome(context);
+                        Tools.openDeepLink(context, tbopen);
+
+                    }
+                }, 16000);
 
 
             }
@@ -137,4 +210,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

@@ -21,12 +21,20 @@ import android.widget.ListView;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by huangdong on 18/10/9.
@@ -58,15 +66,40 @@ public class MainActivity extends Activity {
         final ListView lv = findViewById(R.id.lv);
 
 
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
 
 
-                CookieManager manager = CookieManager.getInstance();
-                String cookies = manager.getCookie(url);
-                Log.i(TAG, "onClick: >>>>>>>>" + cookies);
+
+                String url = "http://track.mobgc.com/v1/click?offer_id=34&aff_id=10001&aid=e38186fc6a4a7a3d&gaid=b9a9f0e9-09d9-4f8b-b77b-71cde8b1ae98&aff_sub1=test";
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .get()//默认就是GET请求，可以不写
+                        .build();
+                Call call = okHttpClient.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "onFailure: ");
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
+
+
+
+//                CookieManager manager = CookieManager.getInstance();
+//                String cookies = manager.getCookie(url);
+//                Log.i(TAG, "onClick: >>>>>>>>" + cookies);
 
             }
         });
@@ -77,14 +110,14 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
 
-                CookieUtil.getCookie(MainActivity.this, url, new CookieUtil.OnCookieLoadedListener() {
-                    @Override
-                    public void onCookieLoaded(String cookie) {
-
-                        Log.i(TAG, "onCookieLoaded: >>>>>>>" + cookie);
-
-                    }
-                });
+//                CookieUtil.getCookie(MainActivity.this, url, new CookieUtil.OnCookieLoadedListener() {
+//                    @Override
+//                    public void onCookieLoaded(String cookie) {
+//
+//                        Log.i(TAG, "onCookieLoaded: >>>>>>>" + cookie);
+//
+//                    }
+//                });
 
 
             }

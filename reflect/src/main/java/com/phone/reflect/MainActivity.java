@@ -6,14 +6,12 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +20,6 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import dalvik.system.DexClassLoader;
 
@@ -34,11 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "reflect";
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    private String path3 = Environment.getExternalStorageDirectory() + "/promote_1.2.dex";
-    private String path4 = Environment.getExternalStorageDirectory() + "/promote_1.3.dex";
-
-    private String proPath = Environment.getExternalStorageDirectory() + "/JRPro_1.0.0.dex";
-    private String advPath = Environment.getExternalStorageDirectory() + "/JRPro_1.1.0.dex";
+    private String path3 = Environment.getExternalStorageDirectory() + "/plugin.apk";
     private Context context;
 
     @Override
@@ -54,16 +47,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                loadDex(proPath, "10000");
-
-
             }
         });
 
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadDex(advPath, "10001");
+
+                int result0 = context.checkCallingOrSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE);
+
+                int result1 = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+                Log.i(TAG, "onClick: >>" + result0 + ", >>" + result1);
 
             }
         });
@@ -89,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadDex(String path, String slotID) {
+    private void loadDex(String path) {
 
         try {
             File file = new File(path);
@@ -98,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "loadDex: ========" + file.getAbsolutePath());
             }
 
-            DexClassLoader dexClassLoader = new DexClassLoader(file.getAbsolutePath(), context.getDir("case", 0).getAbsolutePath(), null, context.getClassLoader());
-            Class cl = dexClassLoader.loadClass("com.jumpraw.pro.JRPro");
-            Method method = cl.getDeclaredMethod("initialize", Context.class, String.class);
+            DexClassLoader dexClassLoader = new DexClassLoader(file.getAbsolutePath(), context.getDir("case", 0).getAbsolutePath(), null, ClassLoader.getSystemClassLoader());
+            Class cl = dexClassLoader.loadClass("com.jumpraw.plugin.ToastUtils");
+
+            Method method = cl.getDeclaredMethod("getPackageName", Context.class, String.class);
             method.setAccessible(true);
-            method.invoke(cl.newInstance(), context, slotID);
+            method.invoke(cl.newInstance(), context, "launcher3");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             for (String permission : permissions) {
-                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this, permissions, 321);
+                if (ContextCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(MainActivity.this, permissions, 321);
                 }
             }
 
