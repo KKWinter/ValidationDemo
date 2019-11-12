@@ -24,9 +24,24 @@
         android:layout_height="wrap_content"
         android:text="three" />
 
-    <ListView
-        android:id="@+id/lv"
+<!--    <ListView-->
+<!--        android:id="@+id/lv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray">
+
+<!--        <TextView-->
+<!--            android:text="sadfsadfdsf"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+    </RelativeLayout>
 
 </LinearLayout>

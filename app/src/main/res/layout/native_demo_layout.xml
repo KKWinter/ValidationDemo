@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/load_native_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Native Ad" />
+
+    <Button
+        android:id="@+id/show_native_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Native Ad" />
+
+    <RelativeLayout
+        android:id="@+id/native_ad_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/native_ad_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"></com.facebook.drawee.view.SimpleDraweeView>
+
+        <TextView
+            android:id="@+id/native_ad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/native_ad_image"
+            android:layout_toRightOf="@id/native_ad_image"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="Native Title"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/native_ad_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/native_ad_title"
+            android:layout_alignBottom="@id/native_ad_image"
+            android:ellipsize="marquee"
+            android:includeFontPadding="false"
+            android:text="Native Desc "
+            android:textColor="#777777"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textSize="18dp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/native_ad_content_image_area"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_below="@id/native_ad_image"
+            android:layout_marginTop="10dp"></com.facebook.drawee.view.SimpleDraweeView>
+
+
+        <TextView
+            android:id="@+id/native_ad_install_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/native_ad_content_image_area"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_red_dark"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</LinearLayout>

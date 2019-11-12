@@ -4,9 +4,6 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.facebook.stetho.Stetho;
-import com.mintegral.msdk.MIntegralSDK;
-import com.mintegral.msdk.out.MIntegralSDKFactory;
-import com.zcoup.base.core.ZcoupSDK;
 
 import java.util.Map;
 
@@ -27,20 +24,20 @@ public class MyApplication extends Application {
 //        hookUtil.hookAms();
 
 
-        // init sdk
-        MIntegralSDK sdk = MIntegralSDKFactory.getMIntegralSDK();
-        // test appId and appKey
-        String appId = "92762";
-        String appKey = "936dcbdd57fe235fd7cf61c2e93da3c4";
-        Map<String, String> map = sdk.getMTGConfigurationMap(appId, appKey);
-        // if you modify applicationId, please add the following attributes,
-        // otherwise it will crash
-        // map.put(MIntegralConstans.PACKAGE_NAME_MANIFEST, "your AndroidManifest
-        // package value");
-        sdk.init(map, this);
-
-
-        ZcoupSDK.initialize(this, "1601");
+//        // init sdk
+//        MIntegralSDK sdk = MIntegralSDKFactory.getMIntegralSDK();
+//        // test appId and appKey
+//        String appId = "92762";
+//        String appKey = "936dcbdd57fe235fd7cf61c2e93da3c4";
+//        Map<String, String> map = sdk.getMTGConfigurationMap(appId, appKey);
+//        // if you modify applicationId, please add the following attributes,
+//        // otherwise it will crash
+//        // map.put(MIntegralConstans.PACKAGE_NAME_MANIFEST, "your AndroidManifest
+//        // package value");
+//        sdk.init(map, this);
+//
+//
+//        ZcoupSDK.initialize(this, "1601");
 
     }
 }

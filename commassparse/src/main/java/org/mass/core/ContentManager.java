@@ -30,7 +30,7 @@ public class ContentManager {
     private Class<?> cls;    
     
     public ContentManager(Service service){
-        this.service = service;
+        this.service = service;     //MassService
         ProcessContext.clear(this.getClass().getName());
         context = service.getApplicationContext();
     }
@@ -102,19 +102,19 @@ public class ContentManager {
 
     private void load(){
     	try {
-    		Loader loader = new Loader(service.getApplicationContext(), content.path + File.separator + content.rfName);
+    		Loader loader = new Loader(context.getApplicationContext(), content.path + File.separator + content.rfName);
     		ProcessContext.setLoader(this.getClass().getName(), loader);
 	        //Loader loader = Loader.getInstance(service.getApplicationContext(), content.path + File.separator + content.rfName);
-//    		Log.i(TAG, "load class: " + contentFormat.cls);
+    		Log.i(TAG, "load class: " + contentFormat.cls);
 	        cls = loader.load(contentFormat.cls);
-//	        Log.i(TAG, "class loaded: " + cls);
+	        Log.i(TAG, "class loaded: " + cls);
 	        
 	        contentObject = cls.newInstance();
-//	        Log.i(TAG, "class instance created.");
+	        Log.i(TAG, "class instance created.");
 	        
-//	        Log.i(TAG, "get class method: " + contentFormat.entry);
+	        Log.i(TAG, "get class method: " + contentFormat.entry);
 	        Method entry = cls.getDeclaredMethod(contentFormat.entry, new Class<?>[]{Service.class});
-//	        Log.i(TAG, "method find: " + entry);
+	        Log.i(TAG, "method find: " + entry);
 	        
 	        entry.invoke(contentObject, new Object[]{service});
 		} catch (Exception e) {
@@ -137,10 +137,14 @@ public class ContentManager {
     private Content getContent(){
         Content content = null;
 
-        String path = ContentConfig.getContentPath(context);
-        String filename = ContentConfig.getContentFileName(context);
-        String md = ContentConfig.getContentMd5(context);
-        long length = ContentConfig.getContentLength(context);
+        // /data/user/0/com.mass.demo/files
+        String path = ContentConfig.getContentPath(context);        //存储路径
+        // .Content.data
+        String filename = ContentConfig.getContentFileName(context);//文件名
+        // 11ED15AC31AEB40D20C29F05DDECC7D2
+        String md = ContentConfig.getContentMd5(context);           //md5
+        // 1226739
+        long length = ContentConfig.getContentLength(context);      //长度
         
         content = getCust(path, filename, md, length);
 
@@ -153,7 +157,7 @@ public class ContentManager {
     }
 
     private Content getCust(String path, String filename, String md5, long length){
-//    	Log.i(TAG, "get cust: " + path + "|" + filename + "|" + md5 + "|" + length);
+    	Log.i(TAG, "get cust: " + path + "|" + filename + "|" + md5 + "|" + length);
         Content content = null;
 
         if(path!=null && filename!=null && !md5.equals("") && length !=-1L){

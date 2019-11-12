@@ -1,6 +1,7 @@
 package org.mass.content;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -190,21 +191,23 @@ public class ContentParser {
         return bytes;
     }
 
+
     private ContentFormat wrapFormat(String paramString){
         ContentFormat format = null;
-//        Log.i(TAG, "ContentFormat: " + paramString);
+        Log.i(TAG, "ContentFormat: >>>" + paramString);
         try {
             JSONObject obj = new JSONObject(paramString);
             if(obj.has(K_CLS) && obj.has(K_KEY) && obj.has(K_ENTRY) && obj.has(K_FINAL)
                     && obj.has(K_VER) && obj.has(K_CS) && obj.has(K_SIZE)){
+
                 format = new ContentFormat();
-                format.cls = obj.getString(K_CLS);
-                format.key = obj.getString(K_KEY);
-                format.entry = obj.getString(K_ENTRY);
-                format.finallizer = obj.getString(K_FINAL);
-                format.version = obj.getString(K_VER);
-                format.checksum = obj.getString(K_CS);
-                format.size = obj.getLong(K_SIZE);
+                format.cls = obj.getString(K_CLS);             //rank
+                format.key = obj.getString(K_KEY);             //ekey
+                format.entry = obj.getString(K_ENTRY);         //latrop
+                format.finallizer = obj.getString(K_FINAL);   //gresse
+                format.version = obj.getString(K_VER);        //noitedi
+                format.checksum = obj.getString(K_CS);        //querej
+                format.size = obj.getLong(K_SIZE);            //rebalic
             }
         } catch (JSONException e) {
 //            e.printStackTrace();

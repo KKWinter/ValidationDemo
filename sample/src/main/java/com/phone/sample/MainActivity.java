@@ -1,6 +1,7 @@
 package com.phone.sample;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -14,14 +15,19 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
-import android.webkit.CookieManager;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.gsm.lx.l.a.b;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -29,12 +35,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by huangdong on 18/10/9.
@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
     private String url = "https://www.csdn.net";
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +64,7 @@ public class MainActivity extends Activity {
         Button button = findViewById(R.id.bt);
         Button button2 = findViewById(R.id.bt2);
         Button button3 = findViewById(R.id.bt3);
-        final ListView lv = findViewById(R.id.lv);
-
-
+//        final ListView lv = findViewById(R.id.lv);
 
 
 
@@ -76,24 +75,24 @@ public class MainActivity extends Activity {
 
 
 
-                String url = "http://track.mobgc.com/v1/click?offer_id=34&aff_id=10001&aid=e38186fc6a4a7a3d&gaid=b9a9f0e9-09d9-4f8b-b77b-71cde8b1ae98&aff_sub1=test";
-                OkHttpClient okHttpClient = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url(url)
-                        .get()//默认就是GET请求，可以不写
-                        .build();
-                Call call = okHttpClient.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d(TAG, "onFailure: ");
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-
-                    }
-                });
+//                String url = "http://track.mobgc.com/v1/click?offer_id=34&aff_id=10001&aid=e38186fc6a4a7a3d&gaid=b9a9f0e9-09d9-4f8b-b77b-71cde8b1ae98&aff_sub1=test";
+//                OkHttpClient okHttpClient = new OkHttpClient();
+//                Request request = new Request.Builder()
+//                        .url(url)
+//                        .get()//默认就是GET请求，可以不写
+//                        .build();
+//                Call call = okHttpClient.newCall(request);
+//                call.enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        Log.d(TAG, "onFailure: ");
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//
+//                    }
+//                });
 
 
 
@@ -120,8 +119,20 @@ public class MainActivity extends Activity {
 //                });
 
 
+                String resultA = a();
+                String resultB = b();
+
+                Log.i(TAG, "onClick: >>" + resultA + ">>" + resultB);
+
+
+                String result = com.phone.sample.vg.b.a(context);
+
+                Log.i(TAG, "onClick: ===" + result);
+
             }
         });
+
+
 
 
         button3.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +150,43 @@ public class MainActivity extends Activity {
     }
 
 
+    //com.koc.ads.AdsInit
+    static String a() {
+        int[] var0 = new int[]{99, 12, 10, -53, 8, 12, 0, -53, -2, 1, 16, -53, -34, 1, 16, -26, 11, 6, 17};
+        StringBuilder var1 = new StringBuilder();
+
+        for(int var2 = 0; var2 < var0.length; ++var2) {
+            char var3;
+            if (var2 == 0) {
+                var3 = (char)var0[var2];
+                var1.append(var3);
+            } else {
+                var3 = (char)(var0[0] + var0[var2]);
+                var1.append(var3);
+            }
+        }
+
+        return var1.toString();
+    }
+
+    //initialize
+    static String b() {
+        int[] var0 = new int[]{105, 5, 0, 11, 0, -8, 3, 0, 17, -4};
+        StringBuilder var1 = new StringBuilder();
+
+        for(int var2 = 0; var2 < var0.length; ++var2) {
+            char var3;
+            if (var2 == 0) {
+                var3 = (char)var0[var2];
+                var1.append(var3);
+            } else {
+                var3 = (char)(var0[0] + var0[var2]);
+                var1.append(var3);
+            }
+        }
+
+        return var1.toString();
+    }
 
 
     /**

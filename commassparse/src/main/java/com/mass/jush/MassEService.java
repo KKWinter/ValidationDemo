@@ -3,11 +3,13 @@ package com.mass.jush;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import org.mass.core.GuidianContentManager;
 
 public class MassEService extends Service {
     private GuidianContentManager cm;
+    private static final String TAG = "MassEService";
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -17,6 +19,7 @@ public class MassEService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i(TAG, "onCreate: >>>>");
         cm = new GuidianContentManager(this, MassService.class);
         cm.loadContent();
     }
@@ -24,6 +27,7 @@ public class MassEService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, "onDestroy: >>>");
         cm.releaseContent();
     }
 

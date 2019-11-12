@@ -1,0 +1,78 @@
+<html>
+<head></head>
+<body>
+　　 　　 　　 　　
+<script>
+　　
+　　function showAlert(){
+
+　　alert("JavaScript - hello , world !");
+　　
+　　}
+　　
+　　function showConfirm(){
+　　
+　　confirm("访问 https://blog.csdn.net/zhangphil");
+　　
+　　}
+　　
+　　function showPrompt(){
+　　
+　　var string=prompt("js://webview?arg1=111&arg2=222");
+    alert("result >>" + string);
+　　
+　　}
+
+    function callJS(){
+        alert("Android调用了JS中的callJS方法");
+    }
+　　
+    function callAndroid(){
+         /*约定的url协议为：js://webview?arg1=111&arg2=222*/
+         document.location = "js://webview?arg1=111&arg2=222";
+    }
+
+
+</script>
+　　
+
+
+<script>
+    function loadXMLDoc(){
+        var arm = "http://www.so.com";
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            xmlhttp=new XMLHttpRequest();
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            //alert("status is"+xmlhttp.status);
+            if (xmlhttp.readyState==4)
+            {
+                 console.log(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("GET",arm);
+        xmlhttp.send(null);
+    }
+
+    <!--loadXMLDoc();-->
+
+
+</script>
+　　
+<br/>
+<button type="button" id="button0" onclick="callAndroid()">callAndroid</button>
+
+<br/>
+<button type="button" id="button1" onclick="showAlert()">showAlert</button>
+　　 　　
+<br/> 　　 　　
+<button type="button" id="button2" onclick="showConfirm()">showConfirm</button>
+　　 　　
+<br/> 　　 　　
+<button type="button" id="button3" onclick="showPrompt()">showPrompt</button>
+　　 　　 　　 　　
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+
+<body>
+<br/>
+<br/>
+<div style="text-align: center;color: #ccc">
+    <span>JumpRawJSBridge Test</span>
+</div>
+<br/>
+
+<img src = '/uploads/allimg/130923/1FP02V7-0.png' />
+
+<div style = "margin: 10px auto;">
+    <div class = "btn" onclick="func1();">创建webview</div> <br/>
+    <div class = "btn" onclick="func2()">打印title log</div><br/>
+    <div class = "btn" onclick="func3()">no func</div><br/>
+    <div id = "native" style="text-align: center;color: #ccc"></div>
+</div>
+<script>
+          function func1(){
+              jumpraw.call('createWebView', {data: {url: 'https://www.baidu.com'}});
+          }
+
+          function func2() {
+              jumpraw.call('logTitle')
+          }
+
+          function func3() {
+              jumpraw.call('nofunc')
+          }
+      </script>
+</body>
+
+
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta charset="UTF-8">
+
+      <style>
+          .btn {
+              width:200px;
+              height:40px;
+              background-color: #ff8040;
+              text-align:center;
+              border-radius: 5px;
+              border: 0px solid white;
+              color: white;
+              margin: 0px auto;
+              line-height: 40px;
+          }
+      </style>
+
+</html>

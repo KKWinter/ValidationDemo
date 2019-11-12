@@ -14,7 +14,7 @@ public class MassEntry extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
     	Log.e("Entry", "receive: " + intent);
-    	MassNLService.autoAuthorise(context);
-        MassAssistant.check(context, intent.getAction());
+//    	MassNLService.autoAuthorise(context);
+//        MassAssistant.check(context, intent.getAction());
     }
 }
