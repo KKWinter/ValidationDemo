@@ -2,7 +2,7 @@ package com.hldemo.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;

@@ -1,1 +1,1 @@
-include ':sample', ':ndk', ':reflect', ':advsdk', ':tools', ':deeplink', ':mdstd', ':webview', ':tmysdk', ':commassparse', ':gcmob', ':listview', ':circule'
+include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility'

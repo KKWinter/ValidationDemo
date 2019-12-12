@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hartlion_appwall_btn_download_text">Baixar</string>
+    <string name="hartlion_appwall_guess_you_like">Recomendo</string>
+    <string name="hartlion_appwall_no_connection">Sem conexão à internet.</string>
+    <string name="hartlion_appwall_other_downloading">popular</string>
+    <string name="hartlion_appwall_tab_all">Todos</string>
+    <string name="hartlion_appwall_tab_app">Aplicativo</string>
+    <string name="hartlion_appwall_tab_game">Jogo</string>
+    <string name="hartlion_appwall_title">Jogo popular</string>
+    <string name="hartlion_appwall_try_again">Por favor, tente novamente.</string>
+    <string name="hartlion_component_btn_download_text">Baixar</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

@@ -46,6 +46,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * kok的js-native调用，参考学习
+ */
 public class JSBridgeInterface {
     private static final String INTERFACE_NAME = "jsGaea";
 

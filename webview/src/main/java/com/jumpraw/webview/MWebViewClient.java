@@ -56,17 +56,6 @@ public class MWebViewClient extends WebViewClient {
 //        return super.shouldOverrideUrlLoading(view, url);
     }
 
-//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//    @Override
-//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//        String url = request.getUrl().toString();
-//        Log.i(TAG, "shouldOverrideUrlLoading: 2>>" + request.getUrl());
-//
-//        if (!url.startsWith("http") && !url.startsWith("https")) {
-//            return true;
-//        }
-//        return super.shouldOverrideUrlLoading(view, request);
-//    }
 
     @Override
     public void onPageFinished(WebView view, String url) {
