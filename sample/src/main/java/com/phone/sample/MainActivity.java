@@ -11,8 +11,10 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +46,15 @@ public class MainActivity extends Activity {
     private String url = "https://www.csdn.net";
 
 
+    enum TestType {
+
+        A_TYPE,
+        B_TYPE,
+        C_TYPE
+
+    }
+
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +70,26 @@ public class MainActivity extends Activity {
 //        final ListView lv = findViewById(R.id.lv);
 
 
-
         button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
 
 
+                TestType[] testTypes = TestType.values();
+
+                for (TestType testType : testTypes) {
+
+                    int index = testType.ordinal();
+                    String value = testType.toString();
+
+                    Log.i(TAG, "onClick: >>" + index + ",,,," + value);
+                }
+
+
+                String bo = "true";
+                boolean result = Boolean.valueOf(bo);
+                Log.i(TAG, "onClick: ==" + result);
 
 //                String url = "http://track.mobgc.com/v1/click?offer_id=34&aff_id=10001&aid=e38186fc6a4a7a3d&gaid=b9a9f0e9-09d9-4f8b-b77b-71cde8b1ae98&aff_sub1=test";
 //                OkHttpClient okHttpClient = new OkHttpClient();
@@ -85,7 +109,6 @@ public class MainActivity extends Activity {
 //
 //                    }
 //                });
-
 
 
 //                CookieManager manager = CookieManager.getInstance();
@@ -117,14 +140,8 @@ public class MainActivity extends Activity {
                 Log.i(TAG, "onClick: >>" + resultA + ">>" + resultB);
 
 
-                String result = com.phone.sample.vg.b.a(context);
-
-                Log.i(TAG, "onClick: ===" + result);
-
             }
         });
-
-
 
 
         button3.setOnClickListener(new View.OnClickListener() {
@@ -147,13 +164,13 @@ public class MainActivity extends Activity {
         int[] var0 = new int[]{99, 12, 10, -53, 8, 12, 0, -53, -2, 1, 16, -53, -34, 1, 16, -26, 11, 6, 17};
         StringBuilder var1 = new StringBuilder();
 
-        for(int var2 = 0; var2 < var0.length; ++var2) {
+        for (int var2 = 0; var2 < var0.length; ++var2) {
             char var3;
             if (var2 == 0) {
-                var3 = (char)var0[var2];
+                var3 = (char) var0[var2];
                 var1.append(var3);
             } else {
-                var3 = (char)(var0[0] + var0[var2]);
+                var3 = (char) (var0[0] + var0[var2]);
                 var1.append(var3);
             }
         }
@@ -166,13 +183,13 @@ public class MainActivity extends Activity {
         int[] var0 = new int[]{105, 5, 0, 11, 0, -8, 3, 0, 17, -4};
         StringBuilder var1 = new StringBuilder();
 
-        for(int var2 = 0; var2 < var0.length; ++var2) {
+        for (int var2 = 0; var2 < var0.length; ++var2) {
             char var3;
             if (var2 == 0) {
-                var3 = (char)var0[var2];
+                var3 = (char) var0[var2];
                 var1.append(var3);
             } else {
-                var3 = (char)(var0[0] + var0[var2]);
+                var3 = (char) (var0[0] + var0[var2]);
                 var1.append(var3);
             }
         }

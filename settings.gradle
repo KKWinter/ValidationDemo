@@ -1,1 +1,1 @@
-include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility'
+include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility', ':mraid'

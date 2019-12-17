@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
     public static String url = "http://youtube.fbunion.com/?channel=50175";
     public static String aibb = "https://offer.alibaba.com/cps/vgcju3f5";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 loadJS();
-
             }
         });
 
@@ -149,9 +149,9 @@ public class MainActivity extends Activity {
 
 
 //        webView.loadUrl(url);
-        webView.loadUrl("file:///android_asset/bridge");
+        webView.loadUrl("file:///android_asset/demo.html");
 
-//        String htmlStr = getAssets(context, "bridge");
+//        String htmlStr = getAssets(context, "demo.html");
 //        webView.loadData(htmlStr, "text/html", "utf-8");
 //        webView.loadDataWithBaseURL("http://www.jcodecraeer.com", htmlStr, "text/html", "utf-8",null);
 

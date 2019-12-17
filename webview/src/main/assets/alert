@@ -35,44 +35,17 @@
 
 </script>
 　　
-
-
-<script>
-    function loadXMLDoc(){
-        var arm = "http://www.so.com";
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-            xmlhttp=new XMLHttpRequest();
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            //alert("status is"+xmlhttp.status);
-            if (xmlhttp.readyState==4)
-            {
-                 console.log(xmlhttp.responseText);
-            }
-        }
-        xmlhttp.open("GET",arm);
-        xmlhttp.send(null);
-    }
-
-    <!--loadXMLDoc();-->
-
-
-</script>
-　　
 <br/>
-<button type="button" id="button0" onclick="callAndroid()">callAndroid</button>
+<button type="button" style="height:60px;width:120px;display:inline-block;" id="button0" onclick="callAndroid()">callAndroid</button>
 
 <br/>
-<button type="button" id="button1" onclick="showAlert()">showAlert</button>
+<button type="button" style="height:60px;width:120px;display:inline-block;" id="button1" onclick="showAlert()">showAlert</button>
 　　 　　
 <br/> 　　 　　
-<button type="button" id="button2" onclick="showConfirm()">showConfirm</button>
+<button type="button" style="height:60px;width:120px;display:inline-block;" id="button2" onclick="showConfirm()">showConfirm</button>
 　　 　　
 <br/> 　　 　　
-<button type="button" id="button3" onclick="showPrompt()">showPrompt</button>
+<button type="button" style="height:60px;width:120px;display:inline-block;" id="button3" onclick="showPrompt()">showPrompt</button>
 　　 　　 　　 　　
 </body>
 </html>

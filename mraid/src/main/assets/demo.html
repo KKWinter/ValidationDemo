@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="mraid.js"></script>
+  <title>mraid演示</title>
+  <style>
+    *{
+      word-break: break-all;
+    }
+    body{
+      background: #eee;
+      margin: 0;
+    }
+    button{
+      background: #000;
+      padding: 5px 20px;
+      color: #fff;
+      margin: 10px 0;
+    }
+    ul{
+      padding: 0;
+    }
+    li{
+      list-style:none;
+      border: 1px solid red;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    input{
+      width: 100%;
+    }
+    .border{
+      border: 1px solid green;
+      padding: 5px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class='app'>
+    <ul>
+      <li>
+        注意：input输入链接，测试需要测试正确和错误的链接，http和https和不带协议头部，商店地址，deeplink
+        <input type="text" v-model='openurl'>
+        <div>
+          {{openurl}}
+        </div>
+        <button v-on:click='mraidopen'>open</button>
+      </li>
+      <li>
+        input输入链接，测试需要测试正确和错误的链接，http和https和不带协议头部
+        <input type="text" v-model='playVideourl'>
+        <div>
+          {{playVideourl}}
+        </div>
+        <button v-on:click='mraidplayVideo'>playVideo</button>
+      </li>
+      <li>
+        mraid扩展打开本页面， 两段素材的expand
+        <button v-on:click='mraidexpand'>expand</button>
+      </li>
+      <li>
+        扩展打开新页面，新页面内也有mraid广告，添加input
+        <input type="text" v-model='expandurl'>
+        <div>
+          {{expandurl}}
+        </div>
+        <button v-on:click='mraidexpandurl'>expand two creative</button>
+      </li>
+      <li>
+        input输入参数，输入不合法参数验证
+        <div>
+          width: <span>{{setResizePropertiesobj.width}}</span>
+          <input type="text" v-model='setResizePropertiesobj.width'>
+        </div>
+        <div>
+          height: <span>{{setResizePropertiesobj.height}}</span>
+          <input type="text" v-model='setResizePropertiesobj.height'>
+        </div>
+        <div class='border'>
+          useCustomClose: <span>{{setResizePropertiesobj.useCustomClose}}</span>
+          <label for="">
+            <input type="radio" v-model='setResizePropertiesobj.useCustomClose' value='true'>true
+          </label>
+          <label for="">
+            <input type="radio" v-model='setResizePropertiesobj.useCustomClose' value='false'>false
+          </label>
+          </div>
+        <div class='border'>
+          isModal: <span>{{setResizePropertiesobj.isModal}}</span>
+          <label for="">
+            <input type="radio" v-model='setResizePropertiesobj.isModal' value='true'>true
+          </label>
+          <label for="">
+            <input type="radio" v-model='setResizePropertiesobj.isModal' value='false'>false
+          </label>
+        </div>
+        <button v-on:click='setResizeProperties'>setResizeProperties</button>
+      </li>
+      <li>
+        触发尺寸变化，多次调用的处理
+        <button v-on:click='mraidresize'>resize</button>
+      </li>
+      <li>
+        1. 一个页面有多个mraid广告
+        2. 多个mraid嵌套
+          <button v-on:click='mraidclose'>close</button>
+      </li>
+      <li>
+        设置朝向
+        <div class='border'>
+          allowOrientationChange: <span>{{setOrientationProperties.allowOrientationChange}}</span>
+          <label for="">
+            <input type="radio" v-model='setOrientationProperties.allowOrientationChange' value='true'>true
+          </label>
+          <label for="">
+            <input type="radio" v-model='setOrientationProperties.allowOrientationChange' value='false'>false
+          </label>
+        </div>
+        <div class='border'>
+          forceOrientation: <span>{{setOrientationProperties.forceOrientation}}</span>
+          <label for="">
+            <input type="radio" v-model='setOrientationProperties.forceOrientation' value='portrait'>portrait
+          </label>
+          <label for="">
+            <input type="radio" v-model='setOrientationProperties.forceOrientation' value='landscape'>landscape
+          </label>
+          <label for="">
+            <input type="radio" v-model='setOrientationProperties.forceOrientation' value='none'>none
+          </label>
+        </div>
+        <div>
+        <button v-on:click='mraidsetOrientationProperties'>setOrientationProperties</button>
+      </li>
+      <li>
+        存图片到相册
+        <input type="text" v-model='storePicture'>
+        <div>
+          {{storePicture}}
+        </div>
+        <button v-on:click='mraidstorePicture'>storePicture</button>
+      </li>
+      <li>
+        日历事件设置，正确错误验证
+        description
+        <div>
+          {{createCalendarEvent.description}}
+        </div>
+        <input type="text" v-model='createCalendarEvent.description'>
+        reminder
+        <div>
+          {{createCalendarEvent.reminder}}
+        </div>
+        <input type="text" v-model='createCalendarEvent.reminder'>
+        <button v-on:click='mraidcreateCalendarEvent()'>createCalendarEvent</button>
+      </li>
+    </ul>
+    <!-- 监测 -->
+    <div>ready:</div>
+    <div id='ready'></div>
+
+    <div>state:</div>
+    <div id='statechange'></div>
+
+    <div>error</div>
+    <div id='error'></div>
+
+    <div>viewableChange</div>
+    <div id='viewableChange'></div>
+
+    <div>sizeChange</div>
+    <div id='sizeChange'></div>
+
+    <div>data</div>
+    <div id='data'></div>
+  </div>
+</body>
+<script>
+  new Vue({
+    el: '.app',
+    data: {
+      openurl: 'http://www.baidu.com',
+      playVideourl: 'https://videocdn.yeahmobi.com/video/output/wh/570_320/offer/9739178/offer_single_file/1258111/ovs_1258111.mp4',
+      expandurl: 'http://www.baidu.com',
+      setResizePropertiesobj: {
+        width: 300,
+        height: 300,
+        useCustomClose: false,
+        isModal: false
+      },
+      setOrientationProperties: {
+        allowOrientationChange: false,
+        forceOrientation: 'portrait'
+      },
+      storePicture: 'http://cdn.cn.ctcnpa.com/pictures/314787213b2aefa9d881810e3a1c6444.jpeg',
+      createCalendarEvent: {
+        description: 'description',
+        reminder: '2018-5-20T10:00-12:00'
+      }
+    },
+    methods: {
+      mraidopen: function () {
+        var vm = this
+        mraid.open(vm.openurl)
+      },
+      mraidplayVideo: function () {
+        var vm = this
+        mraid.playVideo(vm.playVideourl)
+      },
+      mraidexpand: function () {
+        mraid.expand()
+      },
+      mraidexpandurl: function () {
+        var vm = this
+        mraid.expand(vm.expandurl)
+      },
+      setResizeProperties: function () {
+        var vm = this
+        mraid.setResizeProperties(vm.setResizePropertiesobj)
+      },
+      mraidresize: function () {
+        mraid.resize()
+      },
+      mraidclose: function () {
+        mraid.close()
+      },
+      mraidsetOrientationProperties: function () {
+        var vm = this
+        mraid.setOrientationProperties(vm.setOrientationProperties)
+      },
+      mraidstorePicture: function () {
+        var vm = this
+        mraid.storePicture(vm.storePicture)
+      },
+      mraidcreateCalendarEvent: function () {
+        var vm = this
+        mraid.createCalendarEvent(vm.createCalendarEvent)
+      }
+    }
+  })
+  //
+    function getstate () {
+      var dom = `<div>
+        <div>getCurrentPosition</div>
+        <div>${handledata(mraid.getCurrentPosition())}</div>
+        <div>getDefaultPosition</div>
+        <div>${handledata(mraid.getDefaultPosition())}</div>
+        <div>getExpandProperties</div>
+        <div>${handledata(mraid.getExpandProperties())}</div>
+        <div>getMaxSize</div>
+        <div>${handledata(mraid.getMaxSize())}</div>
+        <div>getPlacementType</div>
+        <div>${handledata(mraid.getPlacementType())}</div>
+        <div>getResizeProperties</div>
+        <div>${handledata(mraid.getResizeProperties())}</div>
+        <div>getScreenSize</div>
+        <div>${handledata(mraid.getScreenSize())}</div>
+        <div>getState</div>
+        <div>${handledata(mraid.getState())}</div>
+        <div>getVersion</div>
+        <div>${handledata(mraid.getVersion())}</div>
+        <div>getOrientationProperties</div>
+        <div>${handledata(mraid.getOrientationProperties())}</div>
+      </div>`
+      var data = document.getElementById('data');
+      data.innerHTML = dom
+    }
+    function handledata (data) {
+      return JSON.stringify(data)
+    }
+
+    function readycheck() {
+      if (mraid.getState() == 'loading') {
+        // ready
+        mraid.addEventListener("ready", handleReadyState);
+        function handleReadyState() {
+          var ad = document.getElementById('ready');
+          ad.innerHTML = "Ad is in ready state";
+        }
+      }
+      else {
+        getstate();
+      }
+      // error
+      var handleErrors = function (message, source) {
+        var ad = document.getElementById('error');
+        ad.innerHTML = source + ' generated an error message: "' + message + '"';
+      }
+      mraid.addEventListener("error", handleErrors);
+      // stateChange
+      var handleStateChange = function (state) {
+        var ad = document.getElementById('statechange');
+        ad.innerHTML = state;
+        getstate()
+      }
+      mraid.addEventListener("stateChange", handleStateChange);
+      // viewableChange
+      mraid.addEventListener("viewableChange", handleViewableChange);
+      function handleViewableChange() {
+        var ad = document.getElementById('viewableChange');
+        ad.innerHTML = mraid.isViewable()
+      }
+      // sizeChange
+      mraid.addEventListener("sizeChange", handleSizeChange);
+      function handleSizeChange(w, h) {
+        var ad = document.getElementById('sizeChange');
+        ad.innerHTML = 'width: ' + w + ' and height:' + h
+      }
+      
+      mraid.addEventListener("audioVolumeChange", audioVolumeChange);
+      function audioVolumeChange(audioVolume) {
+          console.log('audioVolumeChange: ' + audioVolume);
+      }
+      
+      mraid.addEventListener("exposureChange", exposureChange);
+      function exposureChange(exposedPercentage, visibleRectangle, occlusionRectangles) {
+          console.log('exposedPercentage: ' + exposedPercentage);
+          console.log('visibleRectangle: ' + handledata(visibleRectangle));
+          console.log('occlusionRectangles: ' + handledata(occlusionRectangles));
+      }
+      
+      setTimeout(_location,1000);
+    }
+
+    function _location(){
+      var location = mraid.getLocation();
+      console.log("location.lat:" + location.lat);
+      console.log("location.lon:" + location.lon);
+      console.log("location.type:" + location.type);
+      console.log("location.accuracy:" + location.accuracy);
+      console.log("location.lastfix:" + location.lastfix);
+      console.log("location.ipservice:" + location.ipservice);
+    }
+    if (document.readyState == "complete") {
+      readycheck();
+    }
+    else {
+      window.addEventListener('load', readycheck, false); //DOM and MRAID check
+    }
+</script>
+</html>

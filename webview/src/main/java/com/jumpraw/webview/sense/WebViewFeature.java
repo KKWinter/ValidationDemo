@@ -177,14 +177,19 @@ public class WebViewFeature {
                 LogUtil.i("handlerCheckPageFinished: js >>>" + js);
                 currentJSIndex++;
 
-                mWebView.evaluateJavascript("javascript:" + js, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String s) {
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    mWebView.loadUrl("javascript:" + js);
+                } else {
+                    mWebView.evaluateJavascript("javascript:" + js, new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String s) {
 
-                        //js执行结束，跳转第二个页面，重新检测
-                        checkPageFinished(true);
-                    }
-                });
+                            //js执行结束，跳转第二个页面，重新检测
+                            checkPageFinished(true);
+                        }
+                    });
+                }
+
 
             } else {
                 checkPageFinished(false);
