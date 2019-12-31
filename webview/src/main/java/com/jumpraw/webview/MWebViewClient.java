@@ -4,9 +4,15 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class MWebViewClient extends WebViewClient {
 
@@ -61,6 +67,15 @@ public class MWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         Log.i(TAG, "onPageFinished: >>" + url);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+
+        String result = request.getUrl().toString();
+
+        return super.shouldInterceptRequest(view, request);
     }
 }
 

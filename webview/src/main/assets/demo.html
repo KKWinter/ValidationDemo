@@ -1,10 +1,11 @@
-<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="mraid.js"></script>
+    <script src="https://mraid.js"></script>
     <title>mraid演示</title>
     <style>
     *{
@@ -37,8 +38,6 @@
       padding: 5px;
       margin: 5px 0;
     }
-
-
     </style>
 </head>
 <body>
@@ -84,21 +83,21 @@
             </div>
             <div class='border'>
                 useCustomClose: <span>{{setResizePropertiesobj.useCustomClose}}</span>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setResizePropertiesobj.useCustomClose'
                            value='true'>true
                 </label>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setResizePropertiesobj.useCustomClose'
                            value='false'>false
                 </label>
             </div>
             <div class='border'>
                 isModal: <span>{{setResizePropertiesobj.isModal}}</span>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setResizePropertiesobj.isModal' value='true'>true
                 </label>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setResizePropertiesobj.isModal' value='false'>false
                 </label>
             </div>
@@ -118,26 +117,26 @@
             <div class='border'>
                 allowOrientationChange:
                 <span>{{setOrientationProperties.allowOrientationChange}}</span>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setOrientationProperties.allowOrientationChange'
                            value='true'>true
                 </label>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setOrientationProperties.allowOrientationChange'
                            value='false'>false
                 </label>
             </div>
             <div class='border'>
                 forceOrientation: <span>{{setOrientationProperties.forceOrientation}}</span>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setOrientationProperties.forceOrientation'
                            value='portrait'>portrait
                 </label>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setOrientationProperties.forceOrientation'
                            value='landscape'>landscape
                 </label>
-                <label>
+                <label for="">
                     <input type="radio" v-model='setOrientationProperties.forceOrientation'
                            value='none'>none
                 </label>
@@ -351,7 +350,6 @@
     else {
       window.addEventListener('load', readycheck, false); //DOM and MRAID check
     }
-
 
 </script>
 </html>

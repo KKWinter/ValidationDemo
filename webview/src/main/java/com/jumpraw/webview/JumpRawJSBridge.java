@@ -30,7 +30,9 @@ public class JumpRawJSBridge {
     @JavascriptInterface
     public void call(String methodName) {
         Log.i(TAG, "call: ==" + methodName);
-        call(methodName, "null");
+//        call(methodName, "null");
+
+        MainActivity.compare(this);
     }
 
 

@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
     public static String jsStr;
     public static String url = "http://youtube.fbunion.com/?channel=50175";
     public static String aibb = "https://offer.alibaba.com/cps/vgcju3f5";
+    private static JumpRawJSBridge jumpRawJSBridge;
 
 
     @Override
@@ -145,15 +146,16 @@ public class MainActivity extends Activity {
         webView.setWebViewClient(new MWebViewClient());
 
         //添加js-native调用对象
-        webView.addJavascriptInterface(new JumpRawJSBridge(), "jumpraw");
+        jumpRawJSBridge = new JumpRawJSBridge();
+        webView.addJavascriptInterface(jumpRawJSBridge, "jumpraw");
 
 
 //        webView.loadUrl(url);
-        webView.loadUrl("file:///android_asset/demo.html");
+//        webView.loadUrl("file:///android_asset/demo.html");
 
-//        String htmlStr = getAssets(context, "demo.html");
-//        webView.loadData(htmlStr, "text/html", "utf-8");
-//        webView.loadDataWithBaseURL("http://www.jcodecraeer.com", htmlStr, "text/html", "utf-8",null);
+        String htmlStr = getAssets(context, "demo.html");
+        webView.loadData(htmlStr, "text/html", "utf-8");
+//        webView.loadDataWithBaseURL(baseUrl, htmlStr, "text/html", "utf-8", null);
 
 //        获取页面内容
 //        webView.loadUrl("javascript:window.jumpraw.showSource('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
@@ -162,6 +164,7 @@ public class MainActivity extends Activity {
 
 
     private void loadJS() {
+        jsStr = "jumpraw.call(\"test\")";
         Log.i("test", "loadJS: >>" + jsStr);
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -173,14 +176,18 @@ public class MainActivity extends Activity {
                 @Override
                 public void onReceiveValue(String s) {
                     //有返回值
-                    Log.i("test", "onReceiveValue: >> result" + s);
+                    Log.i("test", "onReceiveValue: >> " + s);
                 }
             });
         }
     }
 
+    public static void compare(JumpRawJSBridge mJumprawJSBridge) {
+        Log.i(TAG, "compare: >>>" + (mJumprawJSBridge == jumpRawJSBridge));
+    }
 
-    public String getAssets(Context context, String fileName) {
+
+    public static String getAssets(Context context, String fileName) {
         try {
             AssetManager assetManager = context.getAssets();
             InputStream is = assetManager.open(fileName);

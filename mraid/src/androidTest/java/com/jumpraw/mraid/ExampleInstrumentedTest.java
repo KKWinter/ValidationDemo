@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.jumpraw.mraid", appContext.getPackageName());
+        assertEquals("com.jumpraw.mraid.test", appContext.getPackageName());
     }
 }

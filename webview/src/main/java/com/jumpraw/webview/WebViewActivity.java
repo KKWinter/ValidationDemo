@@ -130,8 +130,8 @@ public class WebViewActivity extends Activity {
                 senseVo.url = clickStr2;
                 senseVo.jsStrs = new String[]{js2, js3};
 
-                //testWebview(context, webView);
-                new WebViewFeature(context, senseVo).startLoadUrl(webView);
+                testWebView(context, webView);
+//                new WebViewFeature(context, senseVo).startLoadUrl(webView);
             }
         });
 
