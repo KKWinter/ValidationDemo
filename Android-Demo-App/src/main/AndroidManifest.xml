@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.applovin.apps.demoapp">
+
+    <application
+        android:name="androidx.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <!-- AppLovin SDK Key -->
+        <meta-data
+            android:name="applovin.sdk.key"
+            android:value="2TlxzPBFwkGugu8TEeN9CReETQCSOWZ_5xVi3bqKKPB8IMtrT-auw85s5yzkn0FbFTldHgZzybR8h16ezHaPFc" />
+
+        <!-- DEMO APP ACTIVITIES -->
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".interstitials.InterstitialDemoMenuActivity"
+            android:label="@string/title_activity_interstitial_list" />
+        <activity
+            android:name=".interstitials.InterstitialBasicIntegrationActivity"
+            android:label="@string/title_activity_interstitial_basic_integration" />
+        <activity
+            android:name=".interstitials.InterstitialManualLoadingActivity"
+            android:label="@string/title_activity_interstitial_manual_loading" />
+        <activity
+            android:name=".interstitials.InterstitialZoneActivity"
+            android:label="@string/title_activity_interstitial_zone_integration" />
+        <activity
+            android:name=".rewarded.RewardedVideosDemoMenuActivity"
+            android:label="@string/title_activity_rewarded_videos_list" />
+        <activity
+            android:name=".rewarded.RewardedVideosActivity"
+            android:label="@string/title_activity_rewarded_videos_basic_integration" />
+        <activity
+            android:name=".rewarded.RewardedVideosZoneActivity"
+            android:label="@string/title_activity_rewarded_videos_zone_integration" />
+        <activity
+            android:name=".nativeads.NativeAdDemoMenuActivity"
+            android:label="@string/title_activity_native_ad_list" />
+        <activity
+            android:name=".nativeads.NativeAdCarouselUIActivity"
+            android:label="@string/title_activity_native_ad_carousel_ui"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nativeads.NativeAdRecyclerViewActivity"
+            android:label="@string/title_activity_native_ad_recycler_view" />
+        <activity
+            android:name=".banners.BannerDemoMenuActivity"
+            android:label="@string/title_activity_banner_list" />
+        <activity
+            android:name=".banners.BannerProgrammaticActivity"
+            android:label="@string/title_activity_banner_programmatic" />
+        <activity
+            android:name=".banners.BannerLayoutEditorActivity"
+            android:label="@string/title_activity_banner_layout_editor" />
+        <activity
+            android:name=".banners.BannerZoneActivity"
+            android:label="@string/title_activity_banner_zone_integration" />
+        <activity
+            android:name=".mrecs.MRecDemoMenuActivity"
+            android:label="@string/title_activity_mrec_list" />
+        <activity
+            android:name=".mrecs.MRecProgrammaticActivity"
+            android:label="@string/title_activity_mrec_programmatic" />
+        <activity
+            android:name=".mrecs.MRecLayoutEditorActivity"
+            android:label="@string/title_activity_mrec_layout_editor" />
+        <activity
+            android:name=".leaders.LeaderDemoMenuActivity"
+            android:label="@string/title_activity_leader_list" />
+        <activity
+            android:name=".leaders.LeaderProgrammaticActivity"
+            android:label="@string/title_activity_leader_programmatic" />
+        <activity
+            android:name=".leaders.LeaderLayoutEditorActivity"
+            android:label="@string/title_activity_leader_layout_editor" />
+        <activity
+            android:name=".eventtracking.EventTrackingActivity"
+            android:label="@string/title_activity_event_tracking" />
+    </application>
+</manifest>

@@ -24,12 +24,14 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.RelativeLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -53,7 +55,7 @@ public class MainActivity extends Activity {
     public static String url = "http://youtube.fbunion.com/?channel=50175";
     public static String aibb = "https://offer.alibaba.com/cps/vgcju3f5";
     private static JumpRawJSBridge jumpRawJSBridge;
-
+    private RelativeLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,10 @@ public class MainActivity extends Activity {
         context = this;
 //        checkPermission();
 
-        webView = findViewById(R.id.webview);
+        container = findViewById(R.id.container);
+
+        webView = new WebView(context);
+//        webView = findViewById(R.id.webview);
 
         findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +111,7 @@ public class MainActivity extends Activity {
         //设置自适应屏幕，
         webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
         webSettings.setLoadWithOverviewMode(true);  //缩放至屏幕大小
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);  //适应屏幕，内容将自动缩放  //没有起作用
 
         //缩放操作
         webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提
@@ -115,7 +121,7 @@ public class MainActivity extends Activity {
         //当加载html页面时，WebView会在/data/data/包名 目录下生成database与cache两个文件夹
         //请求的URL记录保存在WebViewCache.db，而URL的内容是保存在WebViewCache文件夹下
         //设置缓存模式
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         //WebSettings.LOAD_CACHE_ONLY  不使用网络，只读取本地缓存数据
         //WebSettings.LOAD_DEFAULT     (默认)根据cache-control决定是否从网络获取数据
         //WebSettings.LOAD_NO_CACHE    不使用缓存，只从网络获取数据
@@ -142,24 +148,31 @@ public class MainActivity extends Activity {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        webView.setWebChromeClient(new MWebChromeClient(context));
+//        webView.setWebChromeClient(new MWebChromeClient(context));
         webView.setWebViewClient(new MWebViewClient());
 
         //添加js-native调用对象
-        jumpRawJSBridge = new JumpRawJSBridge();
-        webView.addJavascriptInterface(jumpRawJSBridge, "jumpraw");
+//        jumpRawJSBridge = new JumpRawJSBridge();
+//        webView.addJavascriptInterface(jumpRawJSBridge, "jumpraw");
 
 
-//        webView.loadUrl(url);
+//        webView.loadUrl("http://www.baidu.com");
+//        webView.loadUrl("https://rtbcreatives.mobgc.com/html/kouzhao/main3.html");
+//        webView.loadUrl("http://news.yausiu.com/ms/api/newsfeed.html?icc=en-us");
 //        webView.loadUrl("file:///android_asset/demo.html");
 
-        String htmlStr = getAssets(context, "demo.html");
+//        webView.loadUrl("http://news.yausiu.com/ms/html/news.html");
+
+        String htmlStr = getAssets(context, "test.html");
         webView.loadData(htmlStr, "text/html", "utf-8");
 //        webView.loadDataWithBaseURL(baseUrl, htmlStr, "text/html", "utf-8", null);
 
 //        获取页面内容
 //        webView.loadUrl("javascript:window.jumpraw.showSource('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
 //        webView.loadUrl("javascript:window.android.printStatus(document.readyState)");
+
+
+        container.addView(webView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
 

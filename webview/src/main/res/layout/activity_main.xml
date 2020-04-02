@@ -14,34 +14,42 @@
         <Button
             android:id="@+id/bt1"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="get_Html" />
+            android:layout_weight="1"
+            android:text="loadWebview"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bt2"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="load_Html" />
+            android:layout_weight="1"
+            android:text="loadJS"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bt3"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="load_JS" />
+            android:layout_weight="1"
+            android:text="click"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>
 
 
+<!--    <WebView-->
+<!--        android:id="@+id/webview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@id/ll" />-->
 
-    <WebView
-        android:id="@+id/webview"
+
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ll" />
-
 
 </RelativeLayout>

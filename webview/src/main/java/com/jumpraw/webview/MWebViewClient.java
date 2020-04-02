@@ -21,12 +21,12 @@ public class MWebViewClient extends WebViewClient {
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        Log.i(TAG, "onPageStarted: >>" + url);
+        Log.i(TAG, "onPageStarted: +++++++++ " + url);
     }
 
     @Override
     public boolean shouldOverrideUrlLoading(final WebView view, String url) {
-        Log.i(TAG, "shouldOverrideUrlLoading: 1>>" + url);
+        Log.i(TAG, "shouldOverrideUrlLoading: >>>>>>>>>>>>>" + url);
 
 
         Uri uri = Uri.parse(url);
@@ -66,7 +66,7 @@ public class MWebViewClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        Log.i(TAG, "onPageFinished: >>" + url);
+        Log.i(TAG, "onPageFinished: +++++++++++ " + url);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -75,6 +75,7 @@ public class MWebViewClient extends WebViewClient {
 
         String result = request.getUrl().toString();
 
+        Log.i(TAG, "shouldInterceptRequest: ==========" + result);
         return super.shouldInterceptRequest(view, request);
     }
 }
