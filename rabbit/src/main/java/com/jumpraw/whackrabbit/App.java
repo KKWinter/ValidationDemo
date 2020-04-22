@@ -17,9 +17,14 @@ public class App extends Application {
         super.onCreate();
         sApplication = this;
 
-        initSDK("5054156", "Whack Rabbit");
-        Stetho.initializeWithDefaults(sApplication);
+//        initSDK("5054156", "android");
 
+
+        initSDK("5054158", "music_fm_test");
+
+
+//        initSDK("5001121", "APP Test Name");
+        Stetho.initializeWithDefaults(sApplication);
     }
 
     public static App getApp() {

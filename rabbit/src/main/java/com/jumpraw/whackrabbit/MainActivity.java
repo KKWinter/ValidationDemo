@@ -8,26 +8,33 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
+import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
-import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTBannerAd;
+import com.bytedance.sdk.openadsdk.TTFeedAd;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
+import com.bytedance.sdk.openadsdk.TTImage;
 import com.bytedance.sdk.openadsdk.TTNativeAd;
+//import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
+import com.bytedance.sdk.openadsdk.TTRewardVideoAd.RewardAdInteractionListener;
 
 import java.lang.annotation.Native;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +49,29 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private RelativeLayout container;
 
+    //rabbit
+//    private String interstitial = "945105375";
+//    private String rewardvideo = "945105337";
+
+
+    //music-fm-test
+    private String interstitial = "945085769";
+    private String rewardvideo = "945085780";
+
+
+    private String bigNative = "945085785";  // 大图，宽高比1.78，最低尺寸690*388px   // imagemode = 3
+    //实际获取，mode = 3， width 1280 ，height 720
+
+    private String videoNative = "945143430";  //视频，视频分辨率1280*720            //imagemode=5
+
+
+    private String smallNative = "945143431";  //小图， 宽高比1：1， 最低尺寸640*640px   //imagemode = 2
+    //实际获取，mode=2， width 1094 ，height 720
+
+    //pangle-demo
+    private String demoid = "945071429";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         TTAdManager ttAdManager = TTAdSdk.getAdManager();
         ttAdManager.requestPermissionIfNecessary(context);
-        mTTAdNative = ttAdManager.createAdNative(getApplicationContext());
+        mTTAdNative = ttAdManager.createAdNative(this);
 
 
         container = findViewById(R.id.container);
@@ -60,20 +90,21 @@ public class MainActivity extends AppCompatActivity {
 
 //                loadBannerAd("945111979");
 
-                loadNativeAd("945106503");
+//                loadNativeAd(videoNative);
 
-//                loadExpressNativeAd("945111979");
+//                loadExpressNativeAd(bigNative);
+
+                loadFeedAd(smallNative);
             }
 
         });
-
 
 
         findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                loadFullScreenVideoAd("945105375");  //whackrabbit
+                loadFullScreenVideoAd(interstitial);  //whackrabbit
 
             }
         });
@@ -82,9 +113,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                hookPackageName(context, "com.jumpraw.whackrabbit");
-
-                loadRewardVideoAd("945105337");
+                loadRewardVideoAd(rewardvideo);
 
             }
         });
@@ -93,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                String sha1 = AppSigning.getSha1(getApplicationContext());
-//                Log.i(TAG, "SHA1: >>>>" + sha1);
+                String sha1 = AppSigning.getSha1(getApplicationContext());
+                Log.i(TAG, "SHA1: >>>>" + sha1);
 //
 //
 //                String packageName = context.getPackageName();
@@ -112,206 +141,295 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadBannerAd(String slotID) {
+
+//    private void loadBannerAd(String slotID) {
+//
+//        AdSlot adSlot = new AdSlot.Builder()
+//                .setCodeId(slotID)
+//
+//                .setAdCount(1)
+//                .setSupportDeepLink(true)
+//                .build();
+//
+//        mTTAdNative.loadBannerAd(adSlot, new TTAdNative.BannerAdListener() {
+//            @Override
+//            public void onError(int i, String s) {
+//                Log.i(TAG, "onError: >>" + i + ", msg: " + s);
+//            }
+//
+//            @Override
+//            public void onBannerAdLoad(TTBannerAd ttBannerAd) {
+//                View bannerView = ttBannerAd.getBannerView();
+//                ttBannerAd.setBannerInteractionListener(new TTBannerAd.AdInteractionListener() {
+//                    @Override
+//                    public void onAdClicked(View view, int i) {
+//                        Log.i(TAG, "onAdClicked: >>>>>>");
+//                    }
+//
+//                    @Override
+//                    public void onAdShow(View view, int i) {
+//                        Log.i(TAG, "onAdShow: ============");
+//                    }
+//                });
+//
+//                if (container != null) {
+//                    container.removeAllViews();
+//                    container.addView(bannerView);
+//                }
+//            }
+//        });
+//
+//    }
+
+
+//    private void loadExpressNativeAd(String slotID) {
+//
+//        AdSlot adSlot = new AdSlot.Builder()
+//                .setCodeId(slotID) //广告位id
+//                .setSupportDeepLink(true)
+//                .setAdCount(1) //请求广告数量为1到3条
+//                .setExpressViewAcceptedSize(300, 100) //期望个性化模板广告view的size,单位dp
+//                .setImageAcceptedSize(640, 320) //这个参数设置即可，不影响个性化模板广告的size
+//                .build();
+//
+//        mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+//            @Override
+//            public void onError(int code, String message) {
+//                container.removeAllViews();
+//            }
+//
+//            @Override
+//            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
+//                if (ads == null || ads.size() == 0) {
+//                    return;
+//                }
+//                TTNativeExpressAd mTTAd = ads.get(0);
+////                bindAdListener(mTTAd);
+//
+//
+//                mTTAd.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
+//                    @Override
+//                    public void onAdClicked(View view, int type) {
+//
+//                        Log.i(TAG, "onAdClicked: ");
+//                    }
+//
+//                    @Override
+//                    public void onAdShow(View view, int type) {
+//                        Log.i(TAG, "onAdShow: ");
+//                    }
+//
+//                    @Override
+//                    public void onRenderFail(View view, String msg, int code) {
+//                        Log.i(TAG, "onRenderFail: ");
+//                    }
+//
+//                    @Override
+//                    public void onRenderSuccess(View view, float width, float height) {
+//                        //返回view的宽高 单位 dp
+//
+//                        if (container != null) {
+//                            container.removeAllViews();
+//                            container.addView(view);
+//                        }
+//
+//                    }
+//                });
+//
+//
+//                mTTAd.render();//调用render开始渲染广告
+//            }
+//        });
+//
+//
+//    }
+
+
+//    private void loadNativeAd(String slotID) {
+//
+//        AdSlot adSlot = new AdSlot.Builder()
+//                .setCodeId(slotID)
+//                .setSupportDeepLink(true)
+//                .setImageAcceptedSize(1080, 1920)
+//                //When requesting a native ad,
+//                // be sure to call this method and set the parameter to
+//                // TYPE_BANNER or TYPE_INTERACTION_AD
+//                .setNativeAdType(AdSlot.TYPE_INTERACTION_AD)
+//                .build();
+//
+//        mTTAdNative.loadNativeAd(adSlot, new TTAdNative.NativeAdListener() {
+//            @Override
+//            public void onError(int i, String s) {
+//                Log.i(TAG, "onError: >>" + i + ", msg: " + s);
+//            }
+//
+//            @Override
+//            public void onNativeAdLoad(List<TTNativeAd> list) {
+//                if (list.get(0) == null) {
+//                    return;
+//                }
+//
+//                TTNativeAd ad = list.get(0);
+//
+//                TextView textView = getTextView(context, ad.getTitle());
+//                ad.registerViewForInteraction(container, textView, new TTNativeAd.AdInteractionListener() {
+//                    @Override
+//                    public void onAdClicked(View view, TTNativeAd ttNativeAd) {
+//                        Log.i(TAG, "onAdClicked: >>>>>>>>>");
+//                    }
+//
+//                    @Override
+//                    public void onAdCreativeClick(View view, TTNativeAd ttNativeAd) {
+//                        Log.i(TAG, "onAdCreativeClick: ============");
+//                    }
+//
+//                    @Override
+//                    public void onAdShow(TTNativeAd ttNativeAd) {
+//                        Log.i(TAG, "onAdShow: ================");
+//                    }
+//                });
+//
+//
+//                if (container != null) {
+//                    container.removeAllViews();
+//                    container.addView(textView);
+//                }
+//
+//            }
+//        });
+//
+//    }
+
+//    private TextView getTextView(Context context, String content) {
+//
+//        TextView textView = new TextView(context);
+//        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        textView.setGravity(Gravity.CENTER);
+//        textView.setText(content);
+//        textView.setTextSize(30);
+//        textView.setTextColor(Color.parseColor("#000000"));
+//
+//        return textView;
+//    }
+
+
+    private void loadFeedAd(String slotID) {
 
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(slotID)
-
-                .setAdCount(1)
-                .setSupportDeepLink(true)
+                .setImageAcceptedSize(1080, 1920)
                 .build();
 
-        mTTAdNative.loadBannerAd(adSlot, new TTAdNative.BannerAdListener() {
-            @Override
-            public void onError(int i, String s) {
-                Log.i(TAG, "onError: >>" + i + ", msg: " + s);
-            }
-
-            @Override
-            public void onBannerAdLoad(TTBannerAd ttBannerAd) {
-                View bannerView = ttBannerAd.getBannerView();
-                ttBannerAd.setBannerInteractionListener(new TTBannerAd.AdInteractionListener() {
-                    @Override
-                    public void onAdClicked(View view, int i) {
-                        Log.i(TAG, "onAdClicked: >>>>>>");
-                    }
-
-                    @Override
-                    public void onAdShow(View view, int i) {
-                        Log.i(TAG, "onAdShow: ============");
-                    }
-                });
-
-                ttBannerAd.setDownloadListener(new TTAppDownloadListener() {
-                    @Override
-                    public void onIdle() {
-
-                    }
-
-                    @Override
-                    public void onDownloadActive(long l, long l1, String s, String s1) {
-
-                    }
-
-                    @Override
-                    public void onDownloadPaused(long l, long l1, String s, String s1) {
-
-                    }
-
-                    @Override
-                    public void onDownloadFailed(long l, long l1, String s, String s1) {
-
-                    }
-
-                    @Override
-                    public void onDownloadFinished(long l, String s, String s1) {
-
-                    }
-
-                    @Override
-                    public void onInstalled(String s, String s1) {
-
-                    }
-                });
-
-                if (container != null) {
-                    container.removeAllViews();
-                    container.addView(bannerView);
-                }
-            }
-        });
-
-    }
-
-
-    private void loadExpressNativeAd(String slotID) {
-
-        AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(slotID) //广告位id
-                .setSupportDeepLink(true)
-                .setAdCount(1) //请求广告数量为1到3条
-                .setExpressViewAcceptedSize(300, 100) //期望个性化模板广告view的size,单位dp
-                .setImageAcceptedSize(640, 320) //这个参数设置即可，不影响个性化模板广告的size
-                .build();
-
-        mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+        mTTAdNative.loadFeedAd(adSlot, new TTAdNative.FeedAdListener() {
             @Override
             public void onError(int code, String message) {
-                container.removeAllViews();
+                //For failed loading callbacks, please refer to "Error Code Description"
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "onError: >>" + code + ">>" + message);
             }
 
             @Override
-            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
-                if (ads == null || ads.size() == 0){
-                    return;
-                }
-                TTNativeExpressAd mTTAd = ads.get(0);
-//                bindAdListener(mTTAd);
-
-
-
-                mTTAd.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
-                    @Override
-                    public void onAdClicked(View view, int type) {
-
-                        Log.i(TAG, "onAdClicked: ");
-                    }
-
-                    @Override
-                    public void onAdShow(View view, int type) {
-                        Log.i(TAG, "onAdShow: ");
-                    }
-
-                    @Override
-                    public void onRenderFail(View view, String msg, int code) {
-                        Log.i(TAG, "onRenderFail: ");
-                    }
-
-                    @Override
-                    public void onRenderSuccess(View view, float width, float height) {
-                        //返回view的宽高 单位 dp
-
-                        if (container != null) {
-                            container.removeAllViews();
-                            container.addView(view);
-                        }
-
-                    }
-                });
-
-
-                mTTAd.render();//调用render开始渲染广告
-            }
-        });
-
-
-    }
-
-
-    private void loadNativeAd(String slotID) {
-
-        AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(slotID)
-                .setSupportDeepLink(true)
-                .setImageAcceptedSize(600, 257)
-                .setNativeAdType(AdSlot.TYPE_BANNER)
-                .setAdCount(1)
-                .build();
-
-        mTTAdNative.loadNativeAd(adSlot, new TTAdNative.NativeAdListener() {
-            @Override
-            public void onError(int i, String s) {
-                Log.i(TAG, "onError: >>" + i + ", msg: " + s);
-            }
-
-            @Override
-            public void onNativeAdLoad(List<TTNativeAd> list) {
-                if (list.get(0) == null) {
+            public void onFeedAdLoad(List<TTFeedAd> ads) {
+                //For successful loading callbacks, please make sure your code is robust enough to overcome exceptions.
+                if (ads == null || ads.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "on FeedAdLoaded: ad is null!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                TTNativeAd ad = list.get(0);
+                TTFeedAd ad = ads.get(0);
+                Log.i(TAG, "onFeedAdLoad: >>>imagemode>>" + ad.getImageMode());
 
+//                View view = ad.getAdView();
+//
+//                ad.setVideoAdListener(new TTFeedAd.VideoAdListener() {
+//                    @Override
+//                    public void onVideoLoad(TTFeedAd ttFeedAd) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onVideoError(int i, int i1) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onVideoAdStartPlay(TTFeedAd ttFeedAd) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onVideoAdPaused(TTFeedAd ttFeedAd) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onVideoAdContinuePlay(TTFeedAd ttFeedAd) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onProgressUpdate(long l, long l1) {
+//
+//                        Log.i(TAG, "onProgressUpdate: >>>" + l + "====" + l1);
+//                    }
+//
+//                    @Override
+//                    public void onVideoAdComplete(TTFeedAd ttFeedAd) {
+//
+//                    }
+//                });
 
-                TextView textView = getTextView(context, ad.getTitle());
-                ad.registerViewForInteraction(container, textView, new TTNativeAd.AdInteractionListener() {
+                View view = View.inflate(context, R.layout.layout_small, null);
+                ImageView image = view.findViewById(R.id.iv_icon);
+                TextView title = view.findViewById(R.id.tv_title);
+                TextView des = view.findViewById(R.id.tv_des);
+
+                TTImage ttImage = ad.getImageList().get(0);
+                Log.i(TAG, "onFeedAdLoad: >>>" + ad.getImageList().size());
+                Log.i(TAG, "onFeedAdLoad: >>>" + ttImage.getHeight() + ">>" + ttImage.getWidth());
+                Log.i(TAG, "onFeedAdLoad: ===" + ttImage.getImageUrl());
+                ttImage.getImageUrl();
+
+                Glide.with(context).load(ttImage.getImageUrl()).into(image);
+                title.setText(ad.getTitle());
+                des.setText(ad.getDescription());
+
+                List<View> clickView = new ArrayList<>();
+                clickView.add(image);
+                List<View> createView = new ArrayList<>();
+                createView.add(title);
+                createView.add(des);
+
+                ad.registerViewForInteraction(container, view, new TTNativeAd.AdInteractionListener() {
                     @Override
                     public void onAdClicked(View view, TTNativeAd ttNativeAd) {
-                        Log.i(TAG, "onAdClicked: >>>>>>>>>");
+
+                        Log.i(TAG, "onAdClicked: >>>>>>>>");
                     }
 
                     @Override
                     public void onAdCreativeClick(View view, TTNativeAd ttNativeAd) {
-                        Log.i(TAG, "onAdCreativeClick: ============");
+
+                        Log.i(TAG, "onAdCreativeClick: >>>>>>>>");
                     }
 
                     @Override
                     public void onAdShow(TTNativeAd ttNativeAd) {
-                        Log.i(TAG, "onAdShow: ================");
+
+                        Log.i(TAG, "onAdShow: >>>>>>>>>>");
                     }
                 });
 
-
                 if (container != null) {
                     container.removeAllViews();
-                    container.addView(textView);
+                    container.addView(view);
                 }
 
             }
+
+
         });
 
-    }
-
-    private TextView getTextView(Context context, String content) {
-
-        TextView textView = new TextView(context);
-        textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        textView.setGravity(Gravity.CENTER);
-        textView.setText(content);
-        textView.setTextSize(30);
-        textView.setTextColor(Color.parseColor("#000000"));
-
-        return textView;
     }
 
 
@@ -354,6 +472,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onVideoComplete() {
+                        Log.i(TAG, "onVideoComplete: ");
                     }
 
                     @Override
@@ -363,7 +482,9 @@ public class MainActivity extends AppCompatActivity {
 
                 });
 
-                mttFullVideoAd.showFullScreenVideoAd(MainActivity.this);
+                if (mttFullVideoAd != null) {
+                    mttFullVideoAd.showFullScreenVideoAd(MainActivity.this);
+                }
             }
 
             @Override
@@ -378,108 +499,75 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void loadRewardVideoAd(String slotID) {
+
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(slotID)
                 .setSupportDeepLink(true)
                 .setAdCount(2)
                 .setImageAcceptedSize(1080, 1920)
-                .setRewardName("金币") //奖励的名称
-                .setRewardAmount(3)   //奖励的数量
-                //必传参数，表来标识应用侧唯一用户；若非服务器回调模式或不需sdk透传
-                //可设置为空字符串
-                .setUserID("")
-                .setOrientation(TTAdConstant.VERTICAL)  //设置期望视频播放的方向，为TTAdConstant.HORIZONTAL或TTAdConstant.VERTICAL
+                .setRewardName("gold coin") //name of the reward
+                .setRewardAmount(3) // number of rewards
+                // It is developer's unique identifier for users; sdk pass-through is not necessary if the server is not in callback mode               
+                // can be set to an empty string
+                .setUserID("user123")
+                .setOrientation(TTAdConstant.VERTICAL) // Set how you wish the video ad to be displayed, choose from TTAdConstant.HORIZONTAL or TTAdConstant.VERTICAL
+                .setMediaExtra("media_extra") // pass-through user information, not mandatory
                 .build();
-
-
         mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
-
-
             @Override
             public void onError(int code, String message) {
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
 
-            //视频广告加载后的视频文件资源缓存到本地的回调
+            //The loaded video file is cached to the local callback
             @Override
             public void onRewardVideoCached() {
-                Toast.makeText(context, "rewardVideoAd video cached", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "rewardVideoAd video cached", Toast.LENGTH_SHORT).show();
             }
 
-            //视频广告素材加载到，如title,视频url等，不包括视频文件
+            //Video creatives are loaded into, such as title, video url, etc., excluding video files
             @Override
             public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
+                Toast.makeText(MainActivity.this, "rewardVideoAd loaded", Toast.LENGTH_SHORT).show();
                 mttRewardVideoAd = ad;
                 //mttRewardVideoAd.setShowDownLoadBar(false);
                 mttRewardVideoAd.setRewardAdInteractionListener(new TTRewardVideoAd.RewardAdInteractionListener() {
-
                     @Override
                     public void onAdShow() {
-                        Toast.makeText(context, "rewardVideoAd show", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "rewardVideoAd show", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAdVideoBarClick() {
-                        Toast.makeText(context, "rewardVideoAd bar click", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "rewardVideoAd bar click", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAdClose() {
-                        Toast.makeText(context, "rewardVideoAd close", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "rewardVideoAd close", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onVideoComplete() {
-                        Toast.makeText(context, "rewardVideoAd complete", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "rewardVideoAd complete", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onVideoError() {
-                        Toast.makeText(context, "onVideoError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "rewardVideoAd onVideoError", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName) {
-                        Toast.makeText(context, "verify:" + rewardVerify + " amount:" + rewardAmount +
-                                        " name:" + rewardName,
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "verify:" + rewardVerify + " amount:" + rewardAmount +
+                                " name:" + rewardName, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onSkippedVideo() {
 
                     }
-                });
-                mttRewardVideoAd.setDownloadListener(new TTAppDownloadListener() {
-                    @Override
-                    public void onIdle() {
 
-                    }
-
-                    @Override
-                    public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
-
-                    }
-
-                    @Override
-                    public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
-
-                    }
-
-                    @Override
-                    public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
-
-                    }
-
-                    @Override
-                    public void onDownloadFinished(long totalBytes, String fileName, String appName) {
-
-                    }
-
-                    @Override
-                    public void onInstalled(String fileName, String appName) {
-
-                    }
                 });
 
                 mttRewardVideoAd.showRewardVideoAd(MainActivity.this);

@@ -1,4 +1,3 @@
-include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility', ':mraiddemo', ':mraid', ':hook', ':sms', ':handler', ':test', ':litepal', ':testa', ':testb', ':compass', ':rabbit', ':Android-Demo-App'
+include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility', ':mraiddemo', ':mraid', ':hook', ':sms', ':handler', ':test', ':litepal', ':testa', ':testb', ':compass', ':rabbit'
 include ':applovin'
-include ':TestApplovin'
-include ':TestIronsource'
+include ':pangle'
