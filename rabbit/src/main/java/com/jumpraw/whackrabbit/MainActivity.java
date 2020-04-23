@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     //rabbit
 //    private String interstitial = "945105375";
 //    private String rewardvideo = "945105337";
+//    private String videoNative = "945147725";
+//    private String feedID = videoNative;
 
 
     //music-fm-test
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     //实际获取，mode = 5，图片尺寸： width 1280 ，height 720， 可以获取广告元素，还可以在ttFeedAd.getAdView()获取视频view
     private String smallNative = "945143431";  //小图， 宽高比1：1， 最低尺寸640*640px   //imagemode = 2
     //实际获取，mode=2， width 1094 ，height 720， 可以获取广告元素，调用ttFeedAd.getAdView()时回调失败接口
-    private String feedID = smallNative;
+    private String feedID = videoNative;
 
     //pangle-demo
     private String demoid = "945071429";
@@ -172,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 TTFeedAd ad = ads.get(0);
                 Log.i(TAG, "onFeedAdLoad: >>>imagemode>> " + ad.getImageMode());
 
-                View view = bindData(ad);
-//                View view = bindVideoData(ad);
+//                View view = bindData(ad);
+                View view = bindVideoData(ad);
 
                 if (container != null) {
                     container.removeAllViews();

@@ -19,7 +19,6 @@ public class App extends Application {
 
 //        initSDK("5054156", "android");
 
-
         initSDK("5054158", "music_fm_test");
 
 

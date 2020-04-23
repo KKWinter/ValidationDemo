@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                FairBid.showTestSuite(MainActivity.this);
 
+                Log.i(TAG, "onClick: >>" + AppSigning.getSha1(context));
             }
         });
 
