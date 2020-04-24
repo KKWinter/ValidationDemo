@@ -1,3 +1,3 @@
-include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility', ':mraiddemo', ':mraid', ':hook', ':sms', ':handler', ':test', ':litepal', ':testa', ':testb', ':compass', ':rabbit'
+include ':sample', ':ndk', ':reflect', ':deeplink', ':webview', ':listview', ':launcher', ':accessibility', ':mraiddemo', ':mraid', ':hook', ':sms', ':handler', ':test', ':litepal', ':testa', ':testb', ':rabbit-fyber', ':rabbit-pangle'
 include ':applovin'
-include ':pangle'
+include ':compass-pangle'
