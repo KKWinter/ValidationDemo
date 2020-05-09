@@ -20,6 +20,13 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/bt11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showInter"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/bt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,6 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SHA1"/>
+
+    <Button
+        android:id="@+id/bt5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Applovin_Native"
+        android:textAllCaps="false"/>
 
     <RelativeLayout
         android:id="@+id/container"

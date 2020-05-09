@@ -19,3 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class test.android.com.new_lib.vo.*{*;}
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+    public *;
+}
+-keepclassmembers class * extends android.webkit.webViewClient {
+    public void *(android.webkit.WebView, java.lang.String,android.graphics.Bitmap);
+    public boolean *(android.webkit.WebView, java.lang.String);
+}
+-keepclassmembers class * extends android.webkit.webViewClient {
+    public void *(android.webkit.webView, jav.lang.String);
+}

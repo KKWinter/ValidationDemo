@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
@@ -23,9 +24,17 @@ import java.lang.reflect.Method;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "pangle";
+
+    public static String appID = "5057050";
+    public static String appName = "Compass";
+
+//    public static String appID = "5054156";
+//    public static String appName = "rabbit";
+
     //compass
     public static String interstitial = "945109241";
     public static String rewardvideo = "945126258";
+
     //rabbit
 //    public static String interstitial = "945105375";
 //    public static String rewardvideo = "945105337";
@@ -41,13 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this.getApplicationContext();
 
-        //Must be called after initialization, otherwise it will be null
-        TTAdManager ttAdManager = TTAdSdk.getAdManager();
-        ttAdManager.requestPermissionIfNecessary(context);
-
-        //baseContext is suggested to be activity
-        mTTAdNative = ttAdManager.createAdNative(this);
-
 
         findViewById(R.id.bt1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 String sha1 = AppSigning.getSha1(context);
 
                 Log.i(TAG, "onClick: >>>" + sha1);
+
+                hookPackageName(context, "com.jumpraw.whackrabbit");
             }
         });
 
@@ -66,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //改系统的会crash，所以要hook穿山甲获取包名并上报的方法
 
+                String packageName = context.getPackageName();
+                Log.i(TAG, "onClick: >>>" + packageName);
+
+                hook(context);
+
             }
         });
 
@@ -73,16 +82,44 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadInterstitial();
+//                loadInterstitial();
+                initSDK(appID, appName);
             }
         });
 
         findViewById(R.id.bt3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Must be called after initialization, otherwise it will be null
+                TTAdManager ttAdManager = TTAdSdk.getAdManager();
+                ttAdManager.requestPermissionIfNecessary(context);
+
+
+                //baseContext is suggested to be activity
+                mTTAdNative = ttAdManager.createAdNative(context);
+
+
                 loadRewarded();
             }
         });
+
+    }
+
+    private void initSDK(String appID, String appName) {
+
+        TTAdSdk.init(getApplicationContext(), new TTAdConfig.Builder()
+                .appId(appID)         //必需， Required parameter, set the app's AppId
+                .appName(appName)     //必需， Required parameter, set the app name
+                .useTextureView(true) // Use TextureView to play the video. The default setting is SurfaceView, when the context is in conflict with SurfaceView, you can use TextureView
+                .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
+                .allowShowPageWhenScreenLock(false) // Allow or deny permission to display the landing page ad in the lock screen
+                .debug(true)   // Turn it on during the testing phase, you can troubleshoot with the log, remove it after launching the app
+//                .supportMultiProcess(false) // Whether to support multi-process, true indicates support
+//                .coppa(0)      //儿童政策 Fields to indicate whether you are a child or an adult ，0:adult ，1:child
+//                .setGDPR(0)    //GDPR政策 Fields to indicate whether you are protected by GDPR,  the value of GDPR : 0 close GDRP Privacy protection ，1: open GDRP Privacy protection
+                .build());
+
 
     }
 
@@ -224,7 +261,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public static void hookPackageName(Context context, String packageName) {
 
         try {
@@ -290,5 +326,24 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i(TAG, "hookPackageName: >>>>>>>======" + packageName1);
     }
 
+
+    public void hook(Context context) {
+
+        try {
+            Class cls = Class.forName("com.bytedance.embedapplog.util.i");
+            Field field = cls.getDeclaredField("a");
+            field.setAccessible(true);
+            field.set(null, "com.jumpraw.whackrabbit");
+
+            Method method = cls.getDeclaredMethod("a", Context.class);
+            method.setAccessible(true);
+            String result = (String) method.invoke(null, context);
+            Log.i(TAG, "hook: >>>" + result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
                 loadRewardVideoAd(rewardvideo);
 
+//                loadFullScreenVideoAd("945168553");
+
             }
         });
 
@@ -317,12 +319,12 @@ public class MainActivity extends AppCompatActivity {
         mTTAdNative.loadFullScreenVideoAd(adSlot, new TTAdNative.FullScreenVideoAdListener() {
             @Override
             public void onError(int code, String message) {
-                Log.i(TAG, "code: " + code + ", msg: " + message);
+                Log.i(TAG, "code: >>>>>>>>>>>>>>>>>>>>>>>" + code + ", msg: " + message);
             }
 
             @Override
             public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {
-                Log.i(TAG, "onFullScreenVideoAdLoad: ");
+                Log.i(TAG, "onFullScreenVideoAdLoad: >>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
                 mttFullVideoAd = ad;
                 mttFullVideoAd.setFullScreenVideoAdInteractionListener(new TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {

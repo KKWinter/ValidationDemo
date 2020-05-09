@@ -69,8 +69,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.facebook.stetho:stetho:1.5.1'
-    implementation 'com.fyber:fairbid-sdk:3.0.0'
+    implementation 'com.fyber:fairbid-sdk:3.1.1'
     //    implementation 'com.google.android.gms:play-services-ads:19.0.1' //11.x and onwards is supported
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+
 
     //AdColony
 //    implementation files('libs/adcolony.jar')
@@ -85,10 +87,10 @@ dependencies {
     implementation 'com.unity3d.ads:unity-ads:3.4.0'
 
     //AdMob
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+//    implementation 'com.google.android.gms:play-services-ads:19.0.1'
 
     //Facebook Audience Network
-    implementation 'com.facebook.android:audience-network-sdk:5.7.1'
+//    implementation 'com.facebook.android:audience-network-sdk:5.7.1'
 
 
 

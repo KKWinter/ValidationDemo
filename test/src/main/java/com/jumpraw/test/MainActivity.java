@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
 
-//        JRWrap.initialize(context, "10000");
+        JRWrap.initialize(context, "10000");
 
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                editText.setText("");
+                editText.setText("");
 
                 JRWrap.initialize(context, "10000");
+
             }
         });
     }
@@ -63,5 +64,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

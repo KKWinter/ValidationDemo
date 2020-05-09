@@ -26,6 +26,7 @@ repositories{
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     def batchImportAar = {
         fileTree(dir: 'libs', include: '*.aar').each { File file ->
             def name = file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name };

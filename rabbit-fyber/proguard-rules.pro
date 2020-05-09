@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# For Fyber
+-keep class com.fyber.** {*;}
+
+# For communication with AdColony's WebView
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
